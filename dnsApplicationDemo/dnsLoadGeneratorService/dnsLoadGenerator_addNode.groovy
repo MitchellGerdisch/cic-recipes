@@ -1,46 +1,40 @@
-/*******************************************************************************
-* Copyright (c) 2011 GigaSpaces Technologies Ltd. All rights reserved
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*       http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*******************************************************************************/
+
+/**********************************************************************************************************************
+ * Parameters:
+ * 		arg[0] = IP address of dns VM. (The dns VM will pass it's IP address when invoking the method.)
+ */
+
 import org.hyperic.sigar.OperatingSystem
 import org.cloudifysource.dsl.context.ServiceContextFactory
 
+def dnsVmIp = args[0]
+
 context = ServiceContextFactory.getServiceContext()
-config = new ConfigSlurper().parse(new File("apacheLB-service.properties").toURL())
 
-def node = args[0]
-def instanceID= args[1]
+config = new ConfigSlurper().parse(new File("dnsLoadGenerator-service.properties").toURL())
+webServerDirectory=config.webServerDirectory
+webServerHtdocs=config.webServerHtdocs
+serverList=config.serverList
+serverListPreamble=config.serverListPreamble
+serverListFile="${webServerDirectory}/${webServerHtdocs}/${serverList}"
 
-def proxyBalancerFullPath = context.attributes.thisInstance["proxyBalancerPath"]
 
-println "addNode: About to add ${node} instance (${instanceID}) to httpd-proxy-balancer.conf..."
-def proxyConfigFile = new File("${proxyBalancerFullPath}")
-def configText = proxyConfigFile.text
-def routeStr=""
-if ( "${config.useStickysession}" == "true" ) {
-	routeStr=" route=" + instanceID
-}
+println "addNode: About to add ${dnsVmIp} to ${serverListFile} ..."
+def dnsServerListFile = new File("${serverListFile}")
+def dnsServerListText = dnsServerListFile.text
 
-def balancerMemberText="BalancerMember " + node + routeStr
 
-if ( configText.contains(balancerMemberText)) {
-	println "addNode: Not adding ${node} to httpd-proxy-balancer.conf because it's already there..."	
+// Update the server list file on the dnsLoadGenerator instance if necessary.
+if ( dnsServerListText.contains(dnsVmIp)) {
+	println "addNode: Not adding ${dnsVmIp} to ${serverListFile} because it's already there..."	
 }
 else { 
-	def modifiedConfig = configText.replace("# Generated code - DO NOT MODIFY", "# Generated code - DO NOT MODIFY" + System.getProperty("line.separator") + "${balancerMemberText}")				
-	proxyConfigFile.text = modifiedConfig
-	println "addNode: Added ${node} to httpd-proxy-balancer.conf text is now : ${modifiedConfig}..."
+	def modifiedText = dnsServerListText.replace("${serverListPreamble}", "${serverListPreamble}" + System.getProperty("line.separator") + "${dnsVmIp}")				
+	dnsServerListFile.text = modifiedText
+	println "addNode: Added ${dnsVmIp} to ${serverListFile} text is now : ${modifiedText}..."
+
+/* NOT using this logic since I don't think I need to save the data as part of the application attributes.
+ * But if I do decide I do want to, I'm keeping this logic handy
 
 	def balancerMembers=context.attributes.thisService["balancerMembers"]
 	if ( balancerMembers == null ) {
@@ -49,33 +43,6 @@ else {
 	balancerMembers +=",${balancerMemberText},"										
 	context.attributes.thisService["balancerMembers"]=balancerMembers
 	println "addNode: Added ${node} to context balancerMembers which is now ${balancerMembers}"
+*/
 
-
-	currOs=System.properties['os.name']
-	println "addNode: About to kill ${currOs} processes ..."
-	if ("${currOs}".toLowerCase().contains('windows')) {
-		println "addNode: About to kill httpd.."
-		def currCmd="taskkill /t /im httpd* /f"
-		currCmd.execute()
-		println "addNode: Killed httpd"
-	}
-	else {
-		def os = OperatingSystem.getInstance()
-		def currVendor=os.getVendor()
-		def stopScript
-		switch (currVendor) {
-			case ["Ubuntu", "Debian", "Mint"]:			
-				stopScript="${context.serviceDirectory}/stopOnUbuntu.sh"
-				break		
-			case ["Red Hat", "CentOS", "Fedora", "Amazon",""]:			
-				stopScript="${context.serviceDirectory}/stop.sh"
-				break					
-			default: throw new Exception("Support for ${currVendor} is not implemented")
-		}
-
-		builder = new AntBuilder()
-		builder.sequential {
-			exec(executable:"${stopScript}", osfamily:"unix")        	
-		}
-	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Set up web page and scripts for load generator
+* Set up web page and scripts for load generator and a base dns server list file
 *******************************************************************************/
 import org.hyperic.sigar.OperatingSystem
 import org.cloudifysource.dsl.context.ServiceContextFactory
@@ -17,6 +17,8 @@ stopLoadCgi=config.stopLoadCgi
 webServerDirectory=config.webServerDirectory
 webServerHtdocs=config.webServerHtdocs
 webServerCgibin=config.webServerCgibin
+serverList=config.serverList
+serverListPreamble=config.serverListPreamble
 
 builder = new AntBuilder()
 
@@ -48,6 +50,9 @@ if ( isLinux ) {
 		
 		echo(message:"dnsLoadGenerator_prestart.groovy: setting all files in ${webServerDirectory}/${webServerCgibin} to 775 executable....")
 		chmod(file:"${webServerDirectory}/${webServerCgibin}/*", perm:'755')
+		
+		// echo some text to a file that will act as the server list file used by the web page to show the DNS servers
+		echo(message:"${serverListPreamble}", file:"${webServerDirectory}/${webServerHtdocs}/${serverList}")
 		
 	}
 }
