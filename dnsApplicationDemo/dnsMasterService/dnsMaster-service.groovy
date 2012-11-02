@@ -28,7 +28,15 @@ service {
 			ServiceUtils.isPortOccupied(53)
 		}
 		
-
+		postStart {
+			def dnsLoadGeneratorService = context.waitForService("dnsLoadGeneratorService", 180, TimeUnit.SECONDS)
+			dnsLoadGeneratorService.invoke("addNode", "${InetAddress.localHost.hostAddress}" as String)
+		}
+		
+		postStop {
+			def dnsLoadGeneratorService = context.waitForService("dnsLoadGeneratorService", 180, TimeUnit.SECONDS)
+			dnsLoadGeneratorService.invoke("removeNode", "${InetAddress.localHost.hostAddress}" as String)
+		}
 	}
 	
 	customCommands ([
