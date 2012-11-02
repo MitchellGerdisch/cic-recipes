@@ -56,11 +56,12 @@ service {
 			return myPids
         	}			
 
-		customCommands ([
-			"addNode" : "dnsLoadGenerator_addNode.groovy",
-			"removeNode" : "dnsLoadGenerator_removeNode.groovy",
-		])
 	}
+
+	customCommands ([
+		"addNode" : "dnsLoadGenerator_addNode.groovy",
+		"removeNode" : "dnsLoadGenerator_removeNode.groovy",
+	])
 	
 	userInterface {
 		metricGroups = ([
