@@ -1,3 +1,6 @@
+import java.util.concurrent.TimeUnit
+
+
 service {
 
 	name "dnsMasterService"
