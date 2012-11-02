@@ -54,7 +54,12 @@ service {
 			def myPids = ServiceUtils.ProcessUtils.getPidsWithQuery("State.Name.re=httpd|apache")
 			println ":ApacheWeb-service.groovy: current PIDs: ${myPids}"
 			return myPids
-        }			
+        	}			
+
+		customCommands ([
+			"addNode" : "dnsLoadGenerator_addNode.groovy",
+			"removeNode" : "dnsLoadGenerator_removeNode.groovy",
+		])
 	}
 	
 	userInterface {
