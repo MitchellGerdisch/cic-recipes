@@ -1,0 +1,53 @@
+/*******************************************************************************
+* Set up web page and scripts for load generator
+*******************************************************************************/
+import org.hyperic.sigar.OperatingSystem
+import org.cloudifysource.dsl.context.ServiceContextFactory
+
+context = ServiceContextFactory.getServiceContext()
+config = new ConfigSlurper().parse(new File("dnsLoadGenerator-service.properties").toURL())
+
+loadGenJar=config.loadGenJar
+loadGenScript=config.loadGenScript
+homePage=config.homePage
+cssPage=config.cssPage
+cssBackgroundImg=config.cssBackgroundImg
+startLoadCgi=config.startLoadCgi
+stopLoadCgi=config.stopLoadCgi
+webServerDirectory=config.webServerDirectory
+webServerHtdocs=config.webServerHtdocs
+webServerCgibin=config.webServerCgibin
+
+builder = new AntBuilder()
+
+def os = OperatingSystem.getInstance()
+def currVendor=os.getVendor()
+def isLinux
+switch (currVendor) {
+	case ["Ubuntu", "Debian", "Mint"]:			
+		isLinux=true
+		break		
+	case ["Red Hat", "CentOS", "Fedora", "Amazon",""]:			
+		isLinux=true
+		break					
+	default: throw new Exception("Support for ${currVendor} is not implemented")
+}
+
+if ( isLinux ) {
+	builder.sequential {		
+		echo(message:"dnsLoadGenerator_prestart.groovy: installing web pages and cgi scripts....")
+
+		copy(file:"${context.serviceDirectory}/${homePage}" , 		tofile:"${webServerDirectory}/${webServerHtdocs}/index.html")
+		copy(file:"${context.serviceDirectory}/${cssPage}" , 		tofile:"${webServerDirectory}/${webServerHtdocs}/${cssPage}")
+		copy(file:"${context.serviceDirectory}/${cssBackgroundImg}" , 		tofile:"${webServerDirectory}/${webServerHtdocs}/${cssBackgroundImg}")
+
+		copy(file:"${context.serviceDirectory}/${loadGenJar}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${loadGenJar}")
+		copy(file:"${context.serviceDirectory}/${loadGenScript}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${loadGenScript}")	
+		copy(file:"${context.serviceDirectory}/${startLoadCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${startLoadCgi}")	
+		copy(file:"${context.serviceDirectory}/${stopLoadCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${stopLoadCgi}")
+		
+		echo(message:"dnsLoadGenerator_prestart.groovy: setting all files in ${webServerDirectory}/${webServerCgibin} to 775 executable....")
+		chmod(file:"${webServerDirectory}/${webServerCgibin}/*", perm:'755')
+		
+	}
+}
