@@ -20,8 +20,7 @@ serverListFile="${webServerDirectory}/${webServerHtdocs}/${serverList}"
 println "removeNode: About to remove ${dnsVmIp} from ${serverListFile} ..."
 def dnsServerListFile = new File("${serverListFile}")
 def dnsServerListText = dnsServerListFile.text
-
-def modifiedText = dnsServerListText.replace("${dnsServerListText}", "")
+def modifiedText = dnsServerListText.replace("${dnsVmIp}", "")
 dnsServerListFile.text = modifiedText
 
 println "removeNode: Removed ${dnsVmIp} from ${serverListFile} text is now : ${modifiedText}..."
