@@ -29,7 +29,7 @@ if ( dnsServerListText.contains(dnsVmIp)) {
 	println "addNode: Not adding ${dnsVmIp} to ${serverListFile} because it's already there..."	
 }
 else { 
-	def modifiedText = dnsServerListText.replace("${serverListPreamble}", "${serverListPreamble}" + System.getProperty("line.separator") + "${dnsVmIp}" + System.getProperty("line.separator"))				
+	def modifiedText = dnsServerListText.replace("${serverListPreamble}", "${serverListPreamble}" + System.getProperty("line.separator") + "${dnsVmIp}")				
 	dnsServerListFile.text = modifiedText
 	println "addNode: Added ${dnsVmIp} to ${serverListFile} text is now : ${modifiedText}..."
 
