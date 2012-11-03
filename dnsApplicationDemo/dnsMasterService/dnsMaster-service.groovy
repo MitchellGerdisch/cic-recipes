@@ -33,12 +33,14 @@ service {
 		
 		postStart {
 			def dnsLoadGeneratorService = context.waitForService("dnsLoadGeneratorService", 180, TimeUnit.SECONDS)
-			dnsLoadGeneratorService.invoke("addNode", "${InetAddress.localHost.hostAddress}" as String)
+			def hostAddress=InetAddress.getHostAddress()
+			dnsLoadGeneratorService.invoke("addNode", "${hostAddress}" as String)
 		}
 		
 		postStop {
 			def dnsLoadGeneratorService = context.waitForService("dnsLoadGeneratorService", 180, TimeUnit.SECONDS)
-			dnsLoadGeneratorService.invoke("removeNode", "${InetAddress.localHost.hostAddress}" as String)
+			def hostAddress=InetAddress.getHostAddress()
+			dnsLoadGeneratorService.invoke("removeNode", "${hostAddress}" as String)
 		}
 	}
 	
