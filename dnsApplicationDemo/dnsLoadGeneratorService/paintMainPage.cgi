@@ -30,7 +30,7 @@ cat << EOF
 <head>
 <meta charset="utf-8">
 <title>DNS Application Scaling Demo Load Generator</title>
-<link rel="stylesheet" href="cb_style.css" media="screen">
+<link rel="stylesheet" href="/cb_style.css" media="screen">
 </head>
 <P>
 <P>

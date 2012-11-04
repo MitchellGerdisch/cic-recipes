@@ -1,66 +1,52 @@
-#!/bin/sh
+#!/usr/bin/python
+print "Content-type: text/html"
+print
 
-# List the servers
+masterServers=[]
+slaveServers=[]
 
-echo "Content-type: text/html"
-echo ""
+listFile=open('DnsServerList.txt', 'r')
+for line in listFile:
+        if line.startswith("Master"):
+                masterServers.append(line.split(':')[1])
+        if line.startswith("Slave"):
+                slaveServers.append(line.split(':')[1])
+listFile.close()
 
-slaveIdx=0
-masterIdx=0
-grep -v "#" DnsServerList.txt | grep -v "^$" | sed 's/:/ /g' |
-while read serverType serverIP
-do
-
-	if [ ${serverType} == "Master" ]
-	then
-		masterServers[${masterIdx}]="${serverIP}"
-		masterIdx=`expr ${masterIdx} + 1`
-	else
-		slaveServers[${slaveIdx}]="${serverIP}"
-		slaveIdx=`expr ${slaveIdx} + 1`
-	fi
-
-done
-cat << EOF
-<html>
+print '''<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="refresh" content="10;url=/cgi-bin/showServers.cgi">
 <title>DNS Servers List</title>
 <link rel="stylesheet" href="/cb_style.css" media="screen">
+<style>
+td
+{
+color:white;
+}
+</style>
 </head>
 <P>
 <body class="claro">
-<table align="center">
-EOF
+<table align="center">'''
 
-idx=0
-while [ ${idx} -lt ${masterIdx} ]
-do
-	echo "<tr>"
-	echo "<td>Master DNS Server</td>"
-	echo "<td>${masterServers[${idx}]}</td>"
-	echo "</tr>"
+for server in masterServers:
+	print "<tr>"
+	print "<td>Master DNS Server</td>"
+	print "<td>" + server + "</td>"
+	print "</tr>"
 	
-	idx=`expr ${idx} + 1`
-done
+for server in slaveServers:
+	print "<tr>"
+	print "<td>Slave DNS Server</td>"
+	print "<td>" + server + "</td>"
+	print "</tr>"
 
-idx=0
-while [ ${idx} -lt ${slaveIdx} ]
-do
-	echo "<tr>"
-	echo "<td>Slave DNS Server</td>"
-	echo "<td>${slaveServers[${idx}]}</td>"
-	echo "</tr>"
-	
-	idx=`expr ${idx} + 1`
-done
-
-cat << EOF
-</table> 
+print '''</table> 
 </body>
-</html>
-EOF
+</html>'''
+
+
 
 
 
