@@ -19,6 +19,8 @@ webServerHtdocs=config.webServerHtdocs
 webServerCgibin=config.webServerCgibin
 serverList=config.serverList
 serverListPreamble=config.serverListPreamble
+showServersCgi=config.showServersCgi
+paintMainPageCgi=config.paintMainPageCgi
 
 // stuff for talking to the openstack APIs
 os_username=config.os_username
@@ -26,7 +28,7 @@ os_password=config.os_password
 os_tenant_name=config.os_tenant_name
 os_auth_url=config.os_auth_url
 nova_list_serversCgi=config.nova_list_serversCgi
-showServersCgi=config.showServersCgi
+
 
 builder = new AntBuilder()
 
@@ -57,6 +59,7 @@ if ( isLinux ) {
 		copy(file:"${context.serviceDirectory}/${stopLoadCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${stopLoadCgi}")
 		copy(file:"${context.serviceDirectory}/${stopLoadCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${stopLoadCgi}")
 		copy(file:"${context.serviceDirectory}/${showServersCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${showServersCgi}")
+		copy(file:"${context.serviceDirectory}/${paintMainPageCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${paintMainPageCgi}")
 		
 		
 		echo(message:"dnsLoadGenerator_prestart.groovy: setting all files in ${webServerDirectory}/${webServerCgibin} to 775 executable....")
