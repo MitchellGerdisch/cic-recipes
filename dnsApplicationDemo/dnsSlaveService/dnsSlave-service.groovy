@@ -34,13 +34,13 @@ service {
 		postStart {
 			def dnsLoadGeneratorService = context.waitForService("dnsLoadGeneratorService", 180, TimeUnit.SECONDS)
 			def hostAddress=System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
-			dnsLoadGeneratorService.invoke("addNode", "${hostAddress}" as String)
+			dnsLoadGeneratorService.invoke("addNode", "Slave:${hostAddress}" as String)
 		}
 		
 		postStop {
 			def dnsLoadGeneratorService = context.waitForService("dnsLoadGeneratorService", 180, TimeUnit.SECONDS)
 			def hostAddress=System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
-			dnsLoadGeneratorService.invoke("removeNode", "${hostAddress}" as String)
+			dnsLoadGeneratorService.invoke("removeNode", "Slave:${hostAddress}" as String)
 		}
 		
 		

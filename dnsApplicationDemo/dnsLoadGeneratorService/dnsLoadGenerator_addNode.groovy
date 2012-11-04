@@ -16,7 +16,7 @@ webServerDirectory=config.webServerDirectory
 webServerHtdocs=config.webServerHtdocs
 serverList=config.serverList
 serverListPreamble=config.serverListPreamble
-serverListFile="${webServerDirectory}/${webServerHtdocs}/${serverList}"
+serverListFile="${webServerDirectory}/${webServerCgibin}/${serverList}"
 
 
 println "addNode: About to add ${dnsVmIp} to ${serverListFile} ..."
