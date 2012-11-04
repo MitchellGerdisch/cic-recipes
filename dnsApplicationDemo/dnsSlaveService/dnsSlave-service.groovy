@@ -40,7 +40,8 @@ service {
 		postStop {
 			def dnsLoadGeneratorService = context.waitForService("dnsLoadGeneratorService", 180, TimeUnit.SECONDS)
 			// Don't remove a node until there are 2 instances running
-			def serviceInstance=context.waitForInstances(2, 300, TimeUnit.SECONDS)
+			// Doesn't seem to be working as expected ...
+			//def serviceInstance=context.waitForInstances(2, 300, TimeUnit.SECONDS)
 			def hostAddress=System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
 			dnsLoadGeneratorService.invoke("removeNode", "Slave:${hostAddress}" as String)
 		}
