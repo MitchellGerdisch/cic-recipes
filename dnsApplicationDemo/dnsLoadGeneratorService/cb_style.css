@@ -7,7 +7,7 @@ h3 {
 	color: white;
 }
 
-html, body, form {
+html, body, form, table {
     height: 100%;
     margin: 0;
     margin-top:20px;
