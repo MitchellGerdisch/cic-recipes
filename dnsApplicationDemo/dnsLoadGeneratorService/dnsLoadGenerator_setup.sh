@@ -22,6 +22,7 @@ rpm -Uvh http://mirrors.servercentral.net/fedora/epel/6/x86_64/epel-release-6-7.
 yum install -y python-novaclient;
 
 # build a nova wrapper script that has the credentials prebuilt in there
-echo "nova --os_username ${OS_USERNAME} --os_password ${OS_PASSWORD} --os_tenant_name ${OS_TENANT_NAME} --os_auth_url ${OS_AUTH_URL} --insecure $*" > ${NOVA_WRAPPER}
+echo "nova --os_username '${OS_USERNAME}' --os_password '${OS_PASSWORD}' --os_tenant_name '${OS_TENANT_NAME}' --os_auth_url '${OS_AUTH_URL}' --insecure \$*" > ${NOVA_WRAPPER}
+
 # make it executable
 chmod +x ${NOVA_WRAPPER}
