@@ -23,7 +23,7 @@ serverListPreamble=config.serverListPreamble
 // stuff for talking to the openstack APIs
 os_username=config.os_username
 os_password=config.os_password
-os_tenant_name=config.os_tenant
+os_tenant_name=config.os_tenant_name
 os_auth_url=config.os_auth_url
 nova_wrapper=config.nova_wrapper
 
