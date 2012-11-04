@@ -17,7 +17,6 @@ serverList=config.serverList
 serverListPreamble=config.serverListPreamble
 serverListFile="${webServerDirectory}/${webServerCgibin}/${serverList}"
 
-
 println "removeNode: About to remove ${dnsVmIp} from ${serverListFile} ..."
 def dnsServerListFile = new File("${serverListFile}")
 def dnsServerListText = dnsServerListFile.text
