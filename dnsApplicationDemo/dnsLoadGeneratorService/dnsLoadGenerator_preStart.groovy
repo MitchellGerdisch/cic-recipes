@@ -20,6 +20,12 @@ webServerCgibin=config.webServerCgibin
 serverList=config.serverList
 serverListPreamble=config.serverListPreamble
 
+// stuff for talking to the openstack APIs
+os_username=config.os_username
+os_password=config.os_password
+os_tenant_name=config.os_tenant
+os_auth_url=config.os_auth_url
+
 builder = new AntBuilder()
 
 def os = OperatingSystem.getInstance()
@@ -53,6 +59,8 @@ if ( isLinux ) {
 		
 		// echo some text to a file that will act as the server list file used by the web page to show the DNS servers
 		echo(message:"${serverListPreamble}", file:"${webServerDirectory}/${webServerHtdocs}/${serverList}")
+		
+		// install python and novaclient used to access the CloudBand northbound OpenStack APIs.
 		
 	}
 }
