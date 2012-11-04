@@ -25,7 +25,8 @@ os_username=config.os_username
 os_password=config.os_password
 os_tenant_name=config.os_tenant_name
 os_auth_url=config.os_auth_url
-nova_list_servers=config.nova_list_servers
+nova_list_serversCgi=config.nova_list_serversCgi
+showServersCgi=config.showServersCgi
 
 builder = new AntBuilder()
 
@@ -54,12 +55,15 @@ if ( isLinux ) {
 		copy(file:"${context.serviceDirectory}/${loadGenScript}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${loadGenScript}")	
 		copy(file:"${context.serviceDirectory}/${startLoadCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${startLoadCgi}")	
 		copy(file:"${context.serviceDirectory}/${stopLoadCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${stopLoadCgi}")
+		copy(file:"${context.serviceDirectory}/${stopLoadCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${stopLoadCgi}")
+		copy(file:"${context.serviceDirectory}/${showServersCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${showServersCgi}")
+		
 		
 		echo(message:"dnsLoadGenerator_prestart.groovy: setting all files in ${webServerDirectory}/${webServerCgibin} to 775 executable....")
 		chmod(file:"${webServerDirectory}/${webServerCgibin}/*", perm:'755')
 		
 		// echo some text to a file that will act as the server list file used by the web page to show the DNS servers
-		echo(message:"${serverListPreamble}", file:"${webServerDirectory}/${webServerHtdocs}/${serverList}")
+		echo(message:"${serverListPreamble}", file:"${webServerDirectory}/${webServerCgibin}/${serverList}")
 		
 		// install python and novaclient used to access the CloudBand northbound OpenStack APIs.
 		exec(executable:"${context.serviceDirectory}/dnsLoadGenerator_setup.sh", osfamily:"unix") {

@@ -12,6 +12,7 @@ context = ServiceContextFactory.getServiceContext()
 config = new ConfigSlurper().parse(new File("dnsLoadGenerator-service.properties").toURL())
 webServerDirectory=config.webServerDirectory
 webServerHtdocs=config.webServerHtdocs
+webServerCgibin=config.webServerCgibin
 serverList=config.serverList
 serverListPreamble=config.serverListPreamble
 serverListFile="${webServerDirectory}/${webServerCgibin}/${serverList}"
