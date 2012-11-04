@@ -71,7 +71,7 @@ if ( isLinux ) {
 			arg(line:"${os_password}")
 			arg(line:"${os_tenant_name}")
 			arg(line:"${os_auth_url}")
-			arg(line: "${webServerDirectory}/${webServerCgibin}/${nova_list_servers}")
+			arg(line: "${webServerDirectory}/${webServerCgibin}/${nova_list_serversCgi}")
 		}
 	}
 }
