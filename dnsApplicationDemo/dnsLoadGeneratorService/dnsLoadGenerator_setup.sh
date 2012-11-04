@@ -6,10 +6,12 @@
 
 
 # these environment variables are used by nova client when called
-export OS_USERNAME="${1}"
-export OS_PASSWORD="${2}"
-export OS_TENANT_NAME="${3}"
-export OS_AUTH_URL="${4}"
+OS_USERNAME="${1}"
+OS_PASSWORD="${2}"
+OS_TENANT_NAME="${3}"
+OS_AUTH_URL="${4}"
+
+NOVA_WRAPPER="${5}"
 
 # install python and the nova client 
 # install python 2.6
@@ -18,3 +20,8 @@ yum install -y python;
 rpm -Uvh http://mirrors.servercentral.net/fedora/epel/6/x86_64/epel-release-6-7.noarch.rpm;
 # install novaclient
 yum install -y python-novaclient;
+
+# build a nova wrapper script that has the credentials prebuilt in there
+echo "nova --os_username ${OS_USERNAME} --os_password ${OS_PASSWORD} --os_tenant_name ${OS_TENANT_NAME} --os_auth_url ${OS_AUTH_URL} --insecure $*" > ${NOVA_WRAPPER}
+# make it executable
+chmod +x ${NOVA_WRAPPER}

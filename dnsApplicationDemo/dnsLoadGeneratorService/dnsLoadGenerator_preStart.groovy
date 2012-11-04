@@ -25,6 +25,7 @@ os_username=config.os_username
 os_password=config.os_password
 os_tenant_name=config.os_tenant
 os_auth_url=config.os_auth_url
+nova_wrapper=config.nova_wrapper
 
 builder = new AntBuilder()
 
@@ -66,6 +67,7 @@ if ( isLinux ) {
 			arg(line:"${os_password}")
 			arg(line:"${os_tenant_name}")
 			arg(line:"${os_auth_url}")
+			arg(line: "${webServerDirectory}/${webServerCgibin}/${nova_wrapper}")
 		}
 	}
 }
