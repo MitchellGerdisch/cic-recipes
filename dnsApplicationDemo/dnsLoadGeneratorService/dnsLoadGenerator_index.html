@@ -10,16 +10,22 @@
 <P>
 <P>
 <body class="claro">
+<table>
+<tr>
+<td>
 <form name="startload" action="/cgi-bin/startload.cgi" method="get">
 Enter Slave DNS Server IP Address and click button to generate load and cause DNS application to scale in a new server.
 <P>
 <input type="text" name="serverip">
 <input type="submit" value="Start Load">
 </form>
-<iframe
-src="/cgi-bin/showServers.cgi"
-width="100%">
+</td>
+</tr>
+<tr>
+<td>
+<iframe src="/cgi-bin/showServers.cgi" width="100%" height="150">
 </iframe>
-
+</td>
+</tr>
 </body>
 </html>
