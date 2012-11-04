@@ -61,6 +61,11 @@ if ( isLinux ) {
 		echo(message:"${serverListPreamble}", file:"${webServerDirectory}/${webServerHtdocs}/${serverList}")
 		
 		// install python and novaclient used to access the CloudBand northbound OpenStack APIs.
-		
+		exec(executable:"${context.serviceDirectory}/dnsLoadGenerator_setup.sh", osfamily:"unix") {
+			arg(line:"${os_username}")
+			arg(line:"${os_password}")
+			arg(line:"${os_tenant_name}")
+			arg(line:"${os_auth_url}")
+		}
 	}
 }
