@@ -7,7 +7,7 @@
 named_stats_file="/var/named/named.stats"
 
 # named stats command
-rndc_cmd="/usr/sbin/rndc stats"
+rndc_cmd="rndc stats"
 
 # if named_stats_file does not exist create one
 if ! [ -a ${named_stats_file} ]

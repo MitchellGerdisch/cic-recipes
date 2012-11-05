@@ -18,6 +18,7 @@ builder.sequential {
 		delete(file:"/etc/sysconfig/named")
 		delete(file:"/etc/resolv.conf")
 		copy(file:"${context.serviceDirectory}/${config.namedFile}" , 		tofile:"/etc/${config.namedFile}")
+		copy(file:"${context.serviceDirectory}/named_monitor.sh" , 		tofile:"/var/named/named_monitor.sh")
 		copy(file:"${context.serviceDirectory}/${config.rootHintsFile}" , 	tofile:"/var/named/${config.rootHintsFile}")
 		copy(file:"${context.serviceDirectory}/${config.localZoneFile}" , 	tofile:"/var/named/${config.localZoneFile}")	
 
