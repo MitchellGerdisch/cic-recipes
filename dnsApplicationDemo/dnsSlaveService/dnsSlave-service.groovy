@@ -76,9 +76,9 @@ service {
 			widgetGroup {
 				name "DNS Request Delta"
 				widgets ([
-					balanceGauge{metric = "DNS Request Delta"}
+					balanceGauge{metric = "DNS Request Delta"},
 				])
-			}
+			},
 			widgetGroup {
 				name "Process Cpu Usage"
 				widgets ([
