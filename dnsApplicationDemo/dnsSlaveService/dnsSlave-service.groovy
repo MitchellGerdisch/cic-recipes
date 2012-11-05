@@ -20,6 +20,12 @@ service {
 	}
 	
 	lifecycle{
+		
+		monitors {
+			key="DNS Request Delta"
+			value="named_monitor.sh".execute()
+			return [key:value]
+		}
 
 		install "dnsSlave-install.groovy"
  	    postInstall "dnsSlave-postinstall.groovy"
