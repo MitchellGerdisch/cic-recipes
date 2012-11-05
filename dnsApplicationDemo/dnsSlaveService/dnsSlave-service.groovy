@@ -66,12 +66,19 @@ service {
 				    "Total Process Cpu Time",
 					"Process Cpu Usage",
 					"Total Process Virtual Memory",
-					"Num Of Active Threads"
+					"Num Of Active Threads",
+					"DNS Request Delta"
 				])
 			}
 		])
 
 		widgetGroups = ([
+			widgetGroup {
+				name "DNS Request Delta"
+				widgets ([
+					balanceGauge{metric = "DNS Request Delta"}
+				])
+			}
 			widgetGroup {
 				name "Process Cpu Usage"
 				widgets ([
@@ -120,6 +127,7 @@ service {
 	scaleCooldownInSeconds 20
 	samplingPeriodInSeconds 1
 
+	/* temporarily disabled
 	scalingRules ([
 		scalingRule {
 
@@ -141,4 +149,5 @@ service {
 			}
 		}
 	])
+	*/
 }

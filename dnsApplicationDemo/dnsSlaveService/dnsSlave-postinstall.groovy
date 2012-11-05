@@ -26,6 +26,7 @@ builder.sequential {
 		copy(file:"${context.serviceDirectory}/${config.revFile}" , 				tofile:"/var/named/slaves/${config.revFile}" )
 		copy(file:"${context.serviceDirectory}/${config.namedZone}" , 		tofile:"/var/named/slaves/${config.namedZone}")
 
+		chmod(dir:"${context.serviceDirectory}", perm: '+x', includes:"*.sh")
 		chmod(file:"/etc/${config.namedFile}", perm:'+x')
 		chmod(dir:"/var/named", perm:'777')
 		chmod(dir:"/var/run/named", perm:'777')
