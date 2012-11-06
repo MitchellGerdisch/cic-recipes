@@ -22,9 +22,8 @@ service {
 	lifecycle{
 		
 		monitors {
-			key="DNS Request Delta"
 			value="/var/named/named_monitor.sh".execute().text
-			return [key:value as Integer]
+			return ["DNS Request Delta":value as Integer]
 		}
 
 		install "dnsSlave-install.groovy"
@@ -65,13 +64,9 @@ service {
 		metricGroups = ([
 			metricGroup {
 
-				name "process"
+				name "DNS"
 
 				metrics([
-				    "Total Process Cpu Time",
-					"Process Cpu Usage",
-					"Total Process Virtual Memory",
-					"Num Of Active Threads",
 					"DNS Request Delta"
 				])
 			}
@@ -84,46 +79,6 @@ service {
 					balanceGauge{metric = "DNS Request Delta"},
 				])
 			},
-			widgetGroup {
-				name "Process Cpu Usage"
-				widgets ([
-					balanceGauge{metric = "Process Cpu Usage"},
-					barLineChart{
-						metric "Process Cpu Usage"
-						axisYUnit Unit.PERCENTAGE
-					}
-				])
-			},
-			widgetGroup {
-				name "Total Process Virtual Memory"
-				widgets([
-					balanceGauge{metric = "Total Process Virtual Memory"},
-					barLineChart {
-						metric "Total Process Virtual Memory"
-						axisYUnit Unit.MEMORY
-					}
-				])
-			},
-			widgetGroup {
-				name "Num Of Active Threads"
-				widgets ([
-					balanceGauge{metric = "Num Of Active Threads"},
-					barLineChart{
-						metric "Num Of Active Threads"
-						axisYUnit Unit.REGULAR
-					}
-				])
-			} ,
-			widgetGroup {
-				name "Total Process Cpu Time"
-				widgets([
-					balanceGauge{metric = "Total Process Cpu Time"},
-					barLineChart {
-						metric "Total Process Cpu Time"
-						axisYUnit Unit.REGULAR
-					}
-				])
-		}
 	])
 }
 
@@ -137,7 +92,6 @@ service {
 		scalingRule {
 
 			serviceStatistics {
-				//metric "Total Process Cpu Time"
 				metric "DNS Request Delta"
 				movingTimeRangeInSeconds 10
 			}
