@@ -23,7 +23,7 @@ service {
 		
 		monitors {
 			value="/var/named/named_monitor.sh".execute().text
-			return ["DNS Request Delta":value as Integer]
+			return ["DNS Request Rate":value as Integer]
 		}
 
 		install "dnsSlave-install.groovy"
@@ -67,18 +67,18 @@ service {
 				name "DNS"
 
 				metrics([
-					"DNS Request Delta"
+					"DNS Request Rate"
 				])
 			}
 		])
 
 		widgetGroups = ([
 			widgetGroup {
-				name "DNS Request Delta"
+				name "DNS Request Rate"
 				widgets ([
-					balanceGauge{metric = "DNS Request Delta"},
+					balanceGauge{metric = "DNS Request Rate"},
 					barLineChart{
-						metric "DNS Request Delta"
+						metric "DNS Request Rate"
 						axisYUnit Unit.REGULAR
 					}
 				])
@@ -96,7 +96,7 @@ service {
 		scalingRule {
 
 			serviceStatistics {
-				metric "DNS Request Delta"
+				metric "DNS Request Rate"
 				movingTimeRangeInSeconds 10
 			}
 
