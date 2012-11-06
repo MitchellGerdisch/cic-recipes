@@ -62,7 +62,7 @@ else:
 	<table>
 	<tr>
 	<td>
-	<H3>Please wait for DNS Slave service to scale back in before running next demo.</H3>
+	<H3>Waiting for DNS Slave service to scale in before running next demo.</H3>
 	</td>
 	</tr>
 	<tr>
