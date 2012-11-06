@@ -32,7 +32,7 @@ new_request_count=`grep "IPv4 requests" ${named_stats_file} | sed 's/^ *//g' |cu
 if [ -z ${new_request_count} ]
 then
         # first time so just set to 0
-        previous_request_count=0
+        new_request_count=0
 fi
 
 request_delta=`expr ${new_request_count} - ${previous_request_count}`

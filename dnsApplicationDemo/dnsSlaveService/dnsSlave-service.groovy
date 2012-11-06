@@ -53,6 +53,11 @@ service {
 			dnsLoadGeneratorService.invoke("removeNode", "Slave:${hostAddress}" as String)
 		}
 		
+		locator {
+			def myPids = ServiceUtils.ProcessUtils.getPidsWithQuery("State.Name.re=named")
+			println "dnsSlave-service.groovy: current PIDs: ${myPids}"
+			return myPids
+		}
 		
 	}
 	
