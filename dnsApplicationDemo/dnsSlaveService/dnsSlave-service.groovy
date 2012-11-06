@@ -23,7 +23,7 @@ service {
 		
 		monitors {
 			key="DNS Request Delta"
-			value="/var/named/named_monitor.sh".execute()
+			value="/var/named/named_monitor.sh".execute().toInteger()
 			return [key:value]
 		}
 

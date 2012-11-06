@@ -18,7 +18,6 @@ builder.sequential {
 		delete(file:"/etc/sysconfig/named")
 		delete(file:"/etc/resolv.conf")
 		copy(file:"${context.serviceDirectory}/${config.namedFile}" , 		tofile:"/etc/${config.namedFile}")
-		copy(file:"${context.serviceDirectory}/named_monitor.sh" , 		tofile:"/var/named/named_monitor.sh")
 		copy(file:"${context.serviceDirectory}/${config.rootHintsFile}" , 	tofile:"/var/named/${config.rootHintsFile}")
 		copy(file:"${context.serviceDirectory}/${config.localZoneFile}" , 	tofile:"/var/named/${config.localZoneFile}")	
 
@@ -26,8 +25,10 @@ builder.sequential {
 		copy(file:"${context.serviceDirectory}/${config.namedZone}" , 		tofile:"/var/named/${config.namedZone}")
 		copy(file:"${context.serviceDirectory}/${config.revFile}" , 				tofile:"/var/named/slaves/${config.revFile}" )
 		copy(file:"${context.serviceDirectory}/${config.namedZone}" , 		tofile:"/var/named/slaves/${config.namedZone}")
-
-		chmod(dir:"${context.serviceDirectory}", perm: '+x', includes:"*.sh")
+		
+		copy(file:"${context.serviceDirectory}/named_monitor.sh" , 		tofile:"/var/named/named_monitor.sh")
+		chmod(file:"/var/named/named_monitor.sh", perm: '+x')
+		
 		chmod(file:"/etc/${config.namedFile}", perm:'+x')
 		chmod(dir:"/var/named", perm:'777')
 		chmod(dir:"/var/run/named", perm:'777')
