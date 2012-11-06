@@ -37,7 +37,7 @@ cat << EOF
 <P>
 <P>
 <body class="claro">
-<table>
+<table align="center" width="100%">
 <tr>
 <td>
 <form name="stopload" action="/cgi-bin/stopload.cgi" method="get">

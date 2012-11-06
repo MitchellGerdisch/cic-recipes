@@ -21,6 +21,7 @@ if num_slaves < 2:
 	<html lang="en">
 	<head>
 	<meta charset="utf-8">
+	<meta http-equiv="refresh" content="15;url=/cgi-bin/paintMainPage.cgi">
 	<title>DNS Application Scaling Demo Load Generator</title>
 	<link rel="stylesheet" href="/cb_style.css" media="screen">
 	</head>
@@ -29,7 +30,7 @@ if num_slaves < 2:
 	<P>
 	<P>
 	<body class="claro">
-	<table>
+	<table align="center" width="100%">
 	<tr>
 	<td>
 	<form name="startload" action="/cgi-bin/startload.cgi" method="get">
@@ -59,7 +60,7 @@ else:
 	<link rel="stylesheet" href="/cb_style.css" media="screen">
 	</head>
 	<body class="claro">
-	<table>
+	<table align="center" width="100%">
 	<tr>
 	<td>
 	<H3>Waiting for DNS Slave service to scale in before running next demo.</H3>
