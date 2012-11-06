@@ -127,27 +127,28 @@ service {
 	scaleCooldownInSeconds 20
 	samplingPeriodInSeconds 1
 
-	/* temporarily disabled
+
 	scalingRules ([
 		scalingRule {
 
 			serviceStatistics {
-				metric "Total Process Cpu Time"
+				//metric "Total Process Cpu Time"
+				metric "DNS Request Delta"
 				timeStatistics Statistics.averageCpuPercentage
 			    instancesStatistics Statistics.maximum
 				movingTimeRangeInSeconds 10
 			}
 
 			highThreshold {
-				value 5
+				value 100
 				instancesIncrease 1
 			}
 
 			lowThreshold {
-				value 2
+				value 10
 				instancesDecrease 1
 			}
 		}
 	])
-	*/
+
 }
