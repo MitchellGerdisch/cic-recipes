@@ -21,6 +21,7 @@ serverList=config.serverList
 serverListPreamble=config.serverListPreamble
 showServersCgi=config.showServersCgi
 paintMainPageCgi=config.paintMainPageCgi
+paintStopPageCgi=config.paintStopPageCgi
 
 // stuff for talking to the openstack APIs
 os_username=config.os_username
