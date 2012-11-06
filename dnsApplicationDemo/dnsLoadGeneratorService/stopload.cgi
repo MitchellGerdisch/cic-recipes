@@ -3,8 +3,13 @@ echo "Content-type: text/html"
 echo ""
 
 dnsLoadGenPID=`ps -eo pid,args |grep dnsLoadGenerator.sh|sed 's/^ *//g'|sed 's/  */:/g'|grep -v "grep" | cut -d":" -f1` > /dev/null
-
-kill -9 ${dnsLoadGenPID} > /dev/null
+while [ ! -z ${dnsLoadGenPID} ]
+do
+        #echo "killing process ${dnsLoadGenPID}"
+        kill -9 ${dnsLoadGenPID} > /dev/null
+        dnsLoadGenPID=`ps -eo pid,args |grep dnsLoadGenerator.sh|sed 's/^ *//g'|sed 's/  */:/g'|grep -v "grep" | cut -d":" -f1` > /dev/null
+done
+#echo "all gone"
 
 cat << EOF
 <html>
