@@ -9,7 +9,8 @@ builder = new AntBuilder();
 //						}
 //}
 builder.sequential { 
-		exec(executable: '/usr/sbin/named' ) {
-						 arg value:"-g"
+		exec(executable: 'service' ) {
+						 arg value:"named"
+						 arg value:"restart"
 						}
 }
