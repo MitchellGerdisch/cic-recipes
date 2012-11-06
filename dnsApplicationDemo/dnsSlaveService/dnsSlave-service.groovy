@@ -77,6 +77,10 @@ service {
 				name "DNS Request Delta"
 				widgets ([
 					balanceGauge{metric = "DNS Request Delta"},
+					barLineChart{
+						metric "DNS Request Delta"
+						axisYUnit Unit.REGULAR
+					}
 				])
 			},
 	])
@@ -97,12 +101,12 @@ service {
 			}
 
 			highThreshold {
-				value 10
+				value 200
 				instancesIncrease 1
 			}
 
 			lowThreshold {
-				value 0
+				value 10
 				instancesDecrease 1
 			}
 		}
