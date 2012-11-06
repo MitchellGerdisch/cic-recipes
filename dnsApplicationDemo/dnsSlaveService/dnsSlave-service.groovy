@@ -23,8 +23,9 @@ service {
 		
 		monitors {
 			key="DNS Request Delta"
-			value="/var/named/named_monitor.sh".execute().text as Integer
-			return [key:value]
+			value="/var/named/named_monitor.sh".execute().text
+			println "DNS-Request-Delta output: +${value}+"
+			return [key:value as Integer]
 		}
 
 		install "dnsSlave-install.groovy"
