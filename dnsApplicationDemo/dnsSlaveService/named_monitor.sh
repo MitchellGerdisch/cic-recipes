@@ -37,7 +37,5 @@ fi
 
 request_delta=`expr ${new_request_count} - ${previous_request_count}`
 
-echo date " running named_monitor.sh - return value: +${request_delta}+" >> /tmp/named_monitor.out
-
 # Now calculate the difference between now and last time and return that delta as a mapped pair
-echo "${request_delta}"
+printf "${request_delta}"
