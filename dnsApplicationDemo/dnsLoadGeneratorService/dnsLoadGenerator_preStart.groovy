@@ -22,6 +22,8 @@ serverListPreamble=config.serverListPreamble
 showServersCgi=config.showServersCgi
 paintMainPageCgi=config.paintMainPageCgi
 paintStopPageCgi=config.paintStopPageCgi
+killLoadCgi=config.killLoadCgi
+
 
 // stuff for talking to the openstack APIs
 os_username=config.os_username
@@ -62,6 +64,7 @@ if ( isLinux ) {
 		copy(file:"${context.serviceDirectory}/${showServersCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${showServersCgi}")
 		copy(file:"${context.serviceDirectory}/${paintMainPageCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${paintMainPageCgi}")
 		copy(file:"${context.serviceDirectory}/${paintStopPageCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${paintStopPageCgi}")
+		copy(file:"${context.serviceDirectory}/${killLoadCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${killLoadCgi}")
 		
 		
 		echo(message:"dnsLoadGenerator_prestart.groovy: setting all files in ${webServerDirectory}/${webServerCgibin} to 775 executable....")
