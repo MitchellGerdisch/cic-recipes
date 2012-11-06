@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Paints main page with an iframe for the server list
+# Paints stop load page with an iframe for the server list
 
 echo "Content-type: text/html"
 echo ""
@@ -12,19 +12,19 @@ grep -v "#" DnsServerList.txt | grep -v "^$" | sed 's/:/ /g' |
 while read serverType serverIP
 do
 
-	if [ ${serverType} == "Master" ]
-	then
-		masterServers[${masterIdx}]="${serverIP}"
-		masterIdx=`expr ${masterIdx} + 1`
-	else
-		slaveServers[${slaveIdx}]="${serverIP}"
-		slaveIdx=`expr ${slaveIdx} + 1`
-	fi
+        if [ ${serverType} == "Master" ]
+        then
+                masterServers[${masterIdx}]="${serverIP}"
+                masterIdx=`expr ${masterIdx} + 1`
+        else
+                slaveServers[${slaveIdx}]="${serverIP}"
+                slaveIdx=`expr ${slaveIdx} + 1`
+        fi
 
 done
 
 
-cat << EOF 
+cat << EOF
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -40,11 +40,8 @@ cat << EOF
 <table>
 <tr>
 <td>
-<form name="startload" action="/cgi-bin/startload.cgi" method="get">
-Enter Slave DNS Server IP Address and click button to generate load and cause DNS application to scale in a new server.
-<P>
-<input type="text" name="serverip">
-<input type="submit" value="Start Load">
+<form name="stopload" action="/cgi-bin/stopload.cgi" method="get">
+<input type="submit" value="Stop Load">
 </form>
 </td>
 </tr>
