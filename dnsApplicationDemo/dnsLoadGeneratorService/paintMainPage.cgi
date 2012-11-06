@@ -4,7 +4,7 @@ print "Content-type: text/html"
 print
 
 # every time we come into the main page, let's make sure the load has been stopped - just in case.
-subprocess.call(['/var/www/cgi-bin/killLoad.sh'])
+subprocess.call(['/var/www/cgi-bin/killLoad.cgi'])
 
 
 
