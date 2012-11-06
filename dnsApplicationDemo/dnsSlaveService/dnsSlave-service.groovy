@@ -140,18 +140,16 @@ service {
 			serviceStatistics {
 				//metric "Total Process Cpu Time"
 				metric "DNS Request Delta"
-				timeStatistics Statistics.averageCpuPercentage
-			    instancesStatistics Statistics.maximum
 				movingTimeRangeInSeconds 10
 			}
 
 			highThreshold {
-				value 100
+				value 10
 				instancesIncrease 1
 			}
 
 			lowThreshold {
-				value 10
+				value 0
 				instancesDecrease 1
 			}
 		}
