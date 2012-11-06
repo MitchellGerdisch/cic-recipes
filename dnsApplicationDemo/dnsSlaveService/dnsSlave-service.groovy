@@ -24,7 +24,9 @@ service {
 		monitors {
 			key="DNS Request Delta"
 			value="/var/named/named_monitor.sh".execute().text
-			println "DNS-Request-Delta output: +${value}+"
+			print "DNS-Request-Delta output: +"
+			print value as Integer
+			print "+\n"
 			return [key:value as Integer]
 		}
 
