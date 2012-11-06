@@ -2,7 +2,7 @@
 echo "Content-type: text/html"
 echo ""
 
-./killLoad.sh
+/var/www/cgi-bin/killLoad.sh
 
 cat << EOF
 <html>
