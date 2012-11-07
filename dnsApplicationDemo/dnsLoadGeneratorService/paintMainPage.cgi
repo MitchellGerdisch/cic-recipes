@@ -71,7 +71,7 @@ else:
 	<table align="center" width="100%">
 	<tr>
 	<td>
-	<H3>Waiting for DNS Slave service to scale in before running next demo.</H3>
+	<H3>DNS Slave service scale-in in progress ...</H3>
 	</td>
 	</tr>
 	<tr>

@@ -1,5 +1,8 @@
 #!/usr/bin/python
 import subprocess
+import psutil
+import sys
+
 print "Content-type: text/html"
 print
 
@@ -15,6 +18,8 @@ for line in listFile:
 listFile.close()
 
 num_slaves=len(slaveServers)
+
+
 
 if num_slaves < 2:
 
@@ -35,7 +40,7 @@ if num_slaves < 2:
         <tr>
         <td>
         <form name="stopload" action="/cgi-bin/stopload.cgi" method="get">
-        Waiting for DNS Slave service to scale out ...
+        DNS Slave service scale-out in progress ...
         <br>
         <input type="submit" value="Abort Demo">
         </form>
@@ -56,6 +61,7 @@ else:
         <html lang="en">
         <head>
         <meta charset="utf-8">
+		<meta http-equiv="refresh" content="5;url=/cgi-bin/paintStopPage.cgi">
         <title>DNS Application Scaling Demo Load Generator</title>
         <link rel="stylesheet" href="/cb_style.css" media="screen">
         </head>
@@ -68,7 +74,7 @@ else:
         <tr>
         <td>
         <form name="stopload" action="/cgi-bin/stopload.cgi" method="get">
-        DNS Service has scaled out.
+        DNS Slave Service scale out complete.
         <br>
         <input type="submit" value="Stop Load">
         </form>

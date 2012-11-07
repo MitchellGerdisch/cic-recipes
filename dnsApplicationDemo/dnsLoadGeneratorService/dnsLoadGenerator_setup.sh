@@ -27,5 +27,8 @@ echo "nova --os_username '${OS_USERNAME}' --os_password '${OS_PASSWORD}' --os_te
 # make it executable
 chmod +x ${NOVA_WRAPPER}
 
+# install python psutil package
+yum install -y python-psutil;
+
 # install dnsperf which used to generate dns load
 yum install -y dnsperf;
