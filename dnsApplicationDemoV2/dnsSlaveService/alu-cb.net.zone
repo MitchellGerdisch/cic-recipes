@@ -1,0 +1,18 @@
+$TTL    5M
+@       IN      SOA     cloudband-test.com.     root (
+                        100100 ; serial
+                        5M ; refresh
+                        15M ; retry
+                        4W ; expire
+                        1H ; Negative caching TTL of 1 hour
+                        )
+@               	IN      NS     cloudband-test.com.
+@               	IN      A       192.168.2.100
+*           		IN      A       192.168.2.102
+www           IN      A       192.168.2.200
+ftp	            IN      A       192.168.2.201
+aaa	            IN      A       192.168.2.202
+bbb	            IN      A       192.168.2.203
+ccc	            IN      A       192.168.2.204
+ddd	            IN      A       192.168.2.204
+eee	            IN      A       192.168.2.206
