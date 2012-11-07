@@ -4,7 +4,7 @@ echo "Content-type: text/html"
 echo ""
 
 # do bunches of cycles
-numCycles=100
+numCycles=200
 
 # get the server IP passed in
 if [ "${QUERY_STRING}" == "" ]

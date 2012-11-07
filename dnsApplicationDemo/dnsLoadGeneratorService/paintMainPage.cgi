@@ -27,7 +27,7 @@ if num_slaves < 2:
 	<html lang="en">
 	<head>
 	<meta charset="utf-8">
-	<meta http-equiv="refresh" content="15;url=/cgi-bin/paintMainPage.cgi">
+	<meta http-equiv="refresh" content="5;url=/cgi-bin/paintMainPage.cgi">
 	<title>DNS Application Scaling Demo Load Generator</title>
 	<link rel="stylesheet" href="/cb_style.css" media="screen">
 	</head>
@@ -43,12 +43,9 @@ if num_slaves < 2:
 	Enter Slave DNS Server IP Address and click button to generate load and cause DNS application to scale in a new server.
 	<P>'''
 
-	// initialize the form with the slave server IP
  	print "<input type=\"text\" value=\"" + slaveServers[0] + "\" name=\"serverip\">"
 
 	print '''<input type="submit" value="Start Load">
-	<input type="text" name="serverip">
-	<input type="submit" value="Start Load">
 	</form>
 	</td>
 	</tr>

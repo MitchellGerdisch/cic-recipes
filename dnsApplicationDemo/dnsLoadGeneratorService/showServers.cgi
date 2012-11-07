@@ -16,7 +16,7 @@ listFile.close()
 print '''<html>
 <head>
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="10;url=/cgi-bin/showServers.cgi">
+<meta http-equiv="refresh" content="5;url=/cgi-bin/showServers.cgi">
 <title>DNS Servers List</title>
 <link rel="stylesheet" href="/cb_style.css" media="screen">
 <style>
