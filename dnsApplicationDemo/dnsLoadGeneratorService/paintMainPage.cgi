@@ -40,7 +40,7 @@ if num_slaves < 2:
 	<tr>
 	<td>
 	<form name="startload" action="/cgi-bin/startload.cgi" method="get">
-	Enter Slave DNS Server IP Address and click button to generate load and cause DNS application to scale in a new server.
+	Enter Slave DNS Server IP Address and click button to generate load and cause DNS application to scale out.
 	<P>'''
 
  	print "<input type=\"text\" value=\"" + slaveServers[0] + "\" name=\"serverip\">"
