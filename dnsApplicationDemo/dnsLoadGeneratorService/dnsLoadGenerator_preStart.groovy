@@ -23,6 +23,7 @@ showServersCgi=config.showServersCgi
 paintMainPageCgi=config.paintMainPageCgi
 paintStopPageCgi=config.paintStopPageCgi
 killLoadCgi=config.killLoadCgi
+resolverList=config.resolverList
 
 
 // stuff for talking to the openstack APIs
@@ -65,6 +66,7 @@ if ( isLinux ) {
 		copy(file:"${context.serviceDirectory}/${paintMainPageCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${paintMainPageCgi}")
 		copy(file:"${context.serviceDirectory}/${paintStopPageCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${paintStopPageCgi}")
 		copy(file:"${context.serviceDirectory}/${killLoadCgi}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${killLoadCgi}")
+		copy(file:"${context.serviceDirectory}/${resolverList}" , 		tofile:"${webServerDirectory}/${webServerCgibin}/${resolverList}")
 		
 		
 		echo(message:"dnsLoadGenerator_prestart.groovy: setting all files in ${webServerDirectory}/${webServerCgibin} to 775 executable....")

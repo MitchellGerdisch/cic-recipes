@@ -26,3 +26,6 @@ echo "nova --os_username '${OS_USERNAME}' --os_password '${OS_PASSWORD}' --os_te
 
 # make it executable
 chmod +x ${NOVA_WRAPPER}
+
+# install dnsperf which used to generate dns load
+yum install -y dnsperf;

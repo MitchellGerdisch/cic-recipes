@@ -3,8 +3,12 @@
 echo "Content-type: text/html"
 echo ""
 
-# do bunches of cycles
-numCycles=2000
+# how long to run test in seconds
+testRunLength=300
+
+# list of names to resolve
+# the recipe should have installed this file.
+resolver_list="/var/www/cgi-bin/resolverList.dat"
 
 # get the server IP passed in
 if [ "${QUERY_STRING}" == "" ]
@@ -22,7 +26,7 @@ fi
 
 
 # run load generator with the given IP address
-/var/www/cgi-bin/dnsLoadGenerator.sh ${server_ip} ${numCycles} > /dev/null &
+/var/www/cgi-bin/dnsLoadGenerator.sh ${server_ip} ${resolver_list} ${testRunLength} > /dev/null &
 
 cat << EOF
 <html>
