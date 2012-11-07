@@ -1,9 +1,0 @@
-$TTL 86400
-@       IN SOA          cloudband.alu-cb.net. root.alu-cb.net. (
-                        2009021601      ; serial
-                        28800            ; refresh
-                        14400            ; retry
-                        3600000          ; expiry
-                        86400 )     ; minimum
-@       IN NS           cloudband.alu-cb.net.
-1       IN PTR          cloudband.alu-cb.net.
