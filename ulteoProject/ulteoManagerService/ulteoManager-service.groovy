@@ -14,6 +14,7 @@ service {
 
 		install "ulteoManager-install.groovy"	
 		start "ulteoManager-start.groovy"	
+		postStart "ulteoManager-poststart.groovy"
 		preStop "ulteoManager-stop.groovy"
 
 		locator {
@@ -25,6 +26,7 @@ service {
 		startDetection {
 			ServiceUtils.arePortsOccupied([80,1111])
 		}
+
 	
 //	 monitors{
 //
