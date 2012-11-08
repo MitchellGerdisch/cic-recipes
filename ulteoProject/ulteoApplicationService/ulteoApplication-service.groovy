@@ -43,7 +43,7 @@ service {
 				
 				sessionCount = "/root/getUlteoSessionsCount.sh ${managerIP} root root".execute().text
 
-				println "Total Number of Sessions --->  : " + sessionCount as Integer
+				println "Total Number of Sessions --->  : " + sessionCount
 			 	return ["Current Active Sessions":sessionCount as Integer ]
 	      }	
 	}
