@@ -7,7 +7,7 @@ service {
 	numInstances 1
 	
 	compute {
-		template "VDI_TMPL"
+		template "QUAD_ROOT_ACCESS"
 	}	
 	
 	lifecycle{
