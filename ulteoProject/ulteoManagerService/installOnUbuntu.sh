@@ -38,7 +38,7 @@ echo mysql-server-5.5 mysql-server/root_password_again password root | sudo debc
 
 #Mysql server installation 
 echo "Using sudo apt-get install mysql-server on one of the following : Ubuntu, Debian, Mint"
-sudo apt-get install -y mysql-server || error_exit $? "Failed on: sudo apt-get install -y ulteo-ovd-session-manager"
+sudo apt-get install -y mysql-server || error_exit $? "Failed on: sudo apt-get install -y mysql-server"
 
 #Create the ovd DB
 echo "Using sudo mysql create database ovd on one of the following : Ubuntu, Debian, Mint"

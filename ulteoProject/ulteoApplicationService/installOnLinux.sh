@@ -38,6 +38,9 @@ echo "enabled=1" >> /etc/yum.repos.d/ovd.repo
 echo "gpgcheck=1" >> /etc/yum.repos.d/ovd.repo
 echo "gpgkey=http://archive.ulteo.com/ovd/keyring" >> /etc/yum.repos.d/ovd.repo
 
+echo "Installing mysql client"
+yum install -y mysql || error_exit $? "Failed on: yum install -y mysql"
+
 echo "Yum install ulteo-ovd-subsystem"
 yum install -y ulteo-ovd-subsystem || error_exit $? "Failed on: yum install -y ulteo-ovd-subsystem"
 

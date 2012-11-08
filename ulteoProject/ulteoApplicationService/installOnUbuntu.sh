@@ -27,6 +27,10 @@ sudo apt-get -y -q update   || error_exit $? "Failed on: sudo apt-get -y update"
 sudo apt-get install -yulteo-keyring  || error_exit $? "Failed on: apt-get install ulteo-keyring"
 sudo apt-get -y -q update  || error_exit $? "Failed on: sudo apt-get -y update second time"
 
+#Mysql client installation 
+echo "Using sudo apt-get install mysql-server on one of the following : Ubuntu, Debian, Mint"
+sudo apt-get install -y mysql-client || error_exit $? "Failed on: sudo apt-get install -y mysql-client"
+
 #Install session manager
 echo "Using sudo apt-get install -y ulteo-ovd-session-manager on one of the following : Ubuntu, Debian, Mint"
 sudo apt-get install -y ulteo-ovd-subsystem || error_exit $? "Failed on: sudo apt-get install -y ulteo-ovd-session-manager"
