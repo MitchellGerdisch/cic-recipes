@@ -39,12 +39,10 @@ service {
 				sessionManagerInstances = ulteoManagerService.waitForInstances(ulteoManagerService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
 				managerIP=sessionManagerInstances[0].hostAddress
 				
-				hostIp=InetAddress.localHost.hostAddress
-				
-				def int sessionCount = GetMySqlSessions.sessionCount(managerIP,"root","root",hostIp)
+				def sessionCount = "getUlteoSessionsClount.sh ${managerIP} root root".execute().text
 
-				println "Number of Session is for host ${hostIp} --->  : " + sessionCount.toInteger()
-			 	return ["Current Active Sessions":  sessionCount.toInteger() ]
+				println "Total Number of Sessions --->  : " + sessionCount as Integer
+			 	return ["Current Active Sessions":  sessionCount as Integer ]
 	      }	
 	}
 	
