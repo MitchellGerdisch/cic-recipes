@@ -35,11 +35,12 @@ service {
 		}
 		
 	 monitors{
+		 		context = ServiceContextFactory.getServiceContext()
 				def ulteoManagerService = context.waitForService("ulteoManagerService", 180, TimeUnit.SECONDS)
 				sessionManagerInstances = ulteoManagerService.waitForInstances(ulteoManagerService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
 				managerIP=sessionManagerInstances[0].hostAddress
 				
-				def sessionCount = "getUlteoSessionsClount.sh ${managerIP} root root".execute().text
+				def sessionCount = "${context.serviceDirectory}.getUlteoSessionsCount.sh ${managerIP} root root".execute().text
 
 				println "Total Number of Sessions --->  : " + sessionCount as Integer
 			 	return ["Current Active Sessions":  sessionCount as Integer ]
