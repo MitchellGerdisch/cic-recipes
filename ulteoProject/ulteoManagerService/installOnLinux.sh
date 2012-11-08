@@ -28,7 +28,17 @@ echo "Setup the repository file"
 rm -f /etc/yum.repos.d/ovd.repo
 echo "[ovd-3.0]" >> /etc/yum.repos.d/ovd.repo
 echo "name=Ulteo OVD 3.0" >> /etc/yum.repos.d/ovd.repo
-echo "baseurl=http://archive.ulteo.com/ovd/3.0/rhel/5.5/" >> /etc/yum.repos.d/ovd.repo
+
+# Need to use the right repository from Ulteo depending on Redhat/Centos release
+redhat_release=`grep release /etc/redhat-release | sed 's/[A-Z]*[a-z]*[()]*//g' | sed 's/^ *//g' | cut -d"." -f1`
+if [ "${redhat_release}" == "6" ]
+then
+        ovd_repo_release="6.0"
+else
+        ovd_repo_release="5.5"
+fi
+echo "baseurl=http://archive.ulteo.com/ovd/3.0/rhel/${ovd_repo_release}/" >> /etc/yum.repos.d/ovd.repo
+
 echo "enabled=1" >> /etc/yum.repos.d/ovd.repo
 echo "gpgcheck=1" >> /etc/yum.repos.d/ovd.repo
 echo "gpgkey=http://archive.ulteo.com/ovd/keyring" >> /etc/yum.repos.d/ovd.repo
