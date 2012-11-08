@@ -42,7 +42,7 @@ echo "Yum install ulteo-ovd-subsystem"
 yum install -y ulteo-ovd-subsystem || error_exit $? "Failed on: yum install -y ulteo-ovd-subsystem"
 
 echo "Config ovd-subsystem-config with SM = " $1
-ovd-subsystem-config --chroot-uri http://dcb-1-images.cic.cloud-band.com/images/paas/base.tar.gz --chroot-dir /opt/ulteo --sm-address $1  < args.dat || error_exit $? "Failed on: ovd-subsystem-config --chroot-uri http://10.45.4.64/gigaspaces-repo-test/base.tar.gz --chroot-dir /opt/ulteo --sm-address $1  < args.dat"
+ovd-subsystem-config --chroot-uri http://dcb-1-images.cic.cloud-band.com/images/paas/ulteo/base.tar.gz --chroot-dir /opt/ulteo --sm-address $1  < args.dat || error_exit $? "Failed on: ovd-subsystem-config --chroot-uri http://10.45.4.64/gigaspaces-repo-test/base.tar.gz --chroot-dir /opt/ulteo --sm-address $1  < args.dat"
 
 echo "Stoping ulteo-ovd-subsystem before Start lifecycle"
 service ulteo-ovd-subsystem stop  || error_exit $? "Failed on: service ovd-subsystem-config stop"

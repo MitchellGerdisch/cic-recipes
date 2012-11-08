@@ -60,7 +60,7 @@ yum install -y ulteo-ovd-session-manager  || error_exit $? "Failed on: yum insta
 
 echo "Config ulteo-ovd-session-manager"
 #sm-config --chroot-uri http://www.ulteo.com/main/downloads/ulteo-ovd.php?suite=3.0 --chroot-dir /var/cache/ulteo/sessionmanager/base.tar.gz --admin-login admin --admin-pwd admin --assume-yes < args.dat  || error_exit $? "Failed on: sudo sm-config arguments.dat"
-sm-config --chroot-uri http://dcb-1-images.cic.cloud-band.com/images/paas/base.tar.gz  --chroot-dir /var/cache/ulteo/sessionmanager/base.tar.gz --admin-login admin --admin-pwd admin --assume-yes < args.dat  || error_exit $? "Failed on: sudo sm-config arguments.dat"
+sm-config --chroot-uri http://dcb-1-images.cic.cloud-band.com/images/paas/ulteo/base.tar.gz  --chroot-dir /var/cache/ulteo/sessionmanager/base.tar.gz --admin-login admin --admin-pwd admin --assume-yes < args.dat  || error_exit $? "Failed on: sudo sm-config arguments.dat"
 
 echo "Executing the following query to Grant Access"
 qry="GRANT ALL ON *.* TO root@'%' IDENTIFIED BY 'root'"
