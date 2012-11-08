@@ -42,6 +42,14 @@ switch (currVendor) {
 	default: throw new Exception("Support for ${currVendor} is not implemented")
 }
 
+// Place the getUlteoSession.sh script in place
+println("Moving getUlteoSessionsCount.sh to it's proper home")
+newbuilder = new AntBuilder()
+newbuilder.sequential {
+	copy(file:"${context.serviceDirectory}/getUlteoSessionsCount.sh" , 		tofile:"/root/getUlteoSessionsCount.sh")
+	chmod(file: "/root/getUlteoSessionsCount.sh", perm:"+x")
+}
+
 
 println("Registering MySQL Driver Class")
 try {
