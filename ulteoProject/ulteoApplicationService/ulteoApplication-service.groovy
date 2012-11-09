@@ -118,7 +118,7 @@ service {
         
 			serviceStatistics {
 				metric "Current Active Sessions"
-				statistics Statistics.maximumOfAverages
+				//statistics Statistics.maximumOfAverages
 				movingTimeRangeInSeconds 10
 			}
 
