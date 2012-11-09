@@ -119,7 +119,7 @@ service {
 			serviceStatistics {
 				metric "Current Active Sessions"
 				statistics Statistics.maximumOfAverages
-				movingTimeRangeInSeconds 1
+				movingTimeRangeInSeconds 10
 			}
 
 			highThreshold {
