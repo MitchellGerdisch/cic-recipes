@@ -10,13 +10,21 @@ osConfig = USMUtils.isWindows() ? config.win32 : config.linux
 
 use_preconfigured=config.using_preconfigured_managerVMtemplate
 
-if ( use_preconfigured ) {
+// Need to set scripts as executable regardless of what happens below
+builder = new AntBuilder()
+builder.sequential {
+	chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")
+}
 
-	// restart mysqld 
+// Now figure out if using the preconfigured mode or not
+if ( use_preconfigured ) {
+	
+	// need to restart mysqld on preconfigured
 	"service mysqld start".execute()
 	
 } else {
-	// build from scratch
+	// build from scratch 
+	// the install scripts will overwrite the preconfigured stuff (I think - probably should test it out ...)
 	builder = new AntBuilder()
 	os = OperatingSystem.getInstance()
 	currVendor = os.getVendor()
@@ -26,7 +34,6 @@ if ( use_preconfigured ) {
 	switch (currVendor) {
 		case ["Ubuntu", "Debian", "Mint"]:
 			builder.sequential {
-				chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")
 				echo(message:"Running ${context.serviceDirectory}/installOnUbuntu.sh os is ${currVendor}...")
 				exec(executable: "${context.serviceDirectory}/installOnUbuntu.sh",osfamily:"unix", failonerror: "true")
 			}
@@ -34,7 +41,6 @@ if ( use_preconfigured ) {
 	
 		case ["Red Hat", "CentOS", "Fedora", "Amazon",""]:
 			builder.sequential {
-				chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")
 				echo(message:"Running ${context.serviceDirectory}/installOnLinux.sh os is ${currVendor}...")
 				exec(executable: "${context.serviceDirectory}/installOnLinux.sh", osfamily:"unix", failonerror: "true")
 			}
