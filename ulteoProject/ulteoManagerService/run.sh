@@ -15,3 +15,6 @@ export PATH=$PATH:/usr/sbin:/sbin || error_exit $? "Failed on: export PATH=$PATH
  `which httpd` -k restart || error_exit $? "Failed on: sudo which httpd -k start"
 
 ps -ef | grep -i httpd | grep -v grep
+
+# hopefully this will fix a problem with the first demouser login
+wget --no-check-certificate "https://127.0.0.1/ovd/client/start.php"
