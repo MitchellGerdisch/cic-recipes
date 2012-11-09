@@ -11,7 +11,7 @@ service {
     elastic true
 	numInstances 1
 	minAllowedInstances 1
-	maxAllowedInstances 4
+	maxAllowedInstances 2
 	
 	compute {
 		template "QUAD_ROOT_ACCESS"
