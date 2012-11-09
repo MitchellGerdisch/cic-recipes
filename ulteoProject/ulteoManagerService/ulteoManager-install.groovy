@@ -15,8 +15,7 @@ if ( use_preconfigured ) {
 	// restart mysqld 
 	"service mysqld start".execute()
 	
-}
-else {
+} else {
 	// build from scratch
 	builder = new AntBuilder()
 	os = OperatingSystem.getInstance()
