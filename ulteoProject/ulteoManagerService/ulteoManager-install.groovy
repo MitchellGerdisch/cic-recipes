@@ -10,9 +10,14 @@ osConfig = USMUtils.isWindows() ? config.win32 : config.linux
 
 use_preconfigured=config.using_preconfigured_managerVMtemplate
 
-// Build from scratch
-if ( ! use_preconfigured ) {
+if ( use_preconfigured ) {
 
+	// restart mysqld 
+	"service mysqld start".execute()
+	
+}
+else {
+	// build from scratch
 	builder = new AntBuilder()
 	os = OperatingSystem.getInstance()
 	currVendor = os.getVendor()
