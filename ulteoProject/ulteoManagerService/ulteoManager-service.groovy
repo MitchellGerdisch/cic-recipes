@@ -16,7 +16,7 @@ service {
 
 		install "ulteoManager-install.groovy"	
 		start "ulteoManager-start.groovy"	
-		//postStart "ulteoManager-poststart.groovy"
+		postStart "ulteoManager-poststart.groovy"
 		preStop "ulteoManager-stop.groovy"
 
 		locator {
