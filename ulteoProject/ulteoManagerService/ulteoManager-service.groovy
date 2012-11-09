@@ -7,7 +7,9 @@ service {
 	numInstances 1
 	
 	compute {
-		template "QUAD_ROOT_ACCESS"
+		// The ulteoManager_Template is a snapshot of a manager VM that has been preconfigured.
+		// This allows the system to be built and scaled automatically without requiring someone to go in as the ulteo admin to set things up.
+		template "ulteoManager_Template"
 	}	
 	
 	lifecycle{
