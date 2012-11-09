@@ -36,7 +36,7 @@ service {
 		
 	 monitors{
 				def ulteoManagerService = context.waitForService("ulteoManagerService", 180, TimeUnit.SECONDS)
-				sessionManagerInstances = ulteoManagerService.waitForInstances(ulteoManagerService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
+				sessionManagerInstances = ulteoManagerService.waitForInstances(ulteoManagerService.numberOfPlannedInstances, 180, TimeUnit.SECONDS)
 				managerIP=sessionManagerInstances[0].hostAddress
 				
 				println "Getting session count from ${managerIP}"
@@ -123,12 +123,12 @@ service {
 			}
 
 			highThreshold {
-				value 2.9
+				value 1.9
 				instancesIncrease 1
 			}
 
 			lowThreshold {
-				value 2.1
+				value 1.1
 				instancesDecrease 1
 			}
 		}
