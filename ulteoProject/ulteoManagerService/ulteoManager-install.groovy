@@ -8,7 +8,7 @@ config = new ConfigSlurper().parse(new File("ulteoManager.properties").toURL())
 context = ServiceContextFactory.getServiceContext()
 osConfig = USMUtils.isWindows() ? config.win32 : config.linux
 
-def use_preconfigured_flag=config.using_preconfigured_managerVMtemplate
+use_preconfigured=config.using_preconfigured_managerVMtemplate
 
 // Build from scratch
 if ( ! use_preconfigured ) {
