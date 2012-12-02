@@ -1,8 +1,8 @@
 This application recipe deploys a RunDeck server and a given number of remote nodes as specified in RunDeckRemoteNodes-service.groovy.
 It is meant to be used by performance testers to deploy a set of VMs and then execute a command across all the VMs.
 
-How to Use the System
-*********************
+How to Use
+**********
 
 Point browser at http://IP-OF-RUNDECKSERVER:4440
 Login as admin/admin
