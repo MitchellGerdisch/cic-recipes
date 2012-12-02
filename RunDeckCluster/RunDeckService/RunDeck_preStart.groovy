@@ -34,7 +34,7 @@ Builder.sequential {
 	chown(file:"${project_properties_file}", owner:"rundeck:rundeck", type:"both");
 	copy(file:"${context.serviceDirectory}/${config.rundeck_private_ssh_key}", tofile:"${priv_ssh_key_file}")
 	chmod(fiel:"${priv_ssh_key_file}", perm:'400')
-	chown(file"${priv_ssh_key_file}", owner:"rundeck:rundeck", type:"both")
+	chown(file:"${priv_ssh_key_file}", owner:"rundeck:rundeck", type:"both")
 }
 
 // Set up and place the resources.xml file used by RunDeck
