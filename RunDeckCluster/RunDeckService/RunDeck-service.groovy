@@ -8,7 +8,7 @@ service {
 
 	compute {
 		// Use template with root access - to make things easier
-		template "BIG_MEDIUM"
+		template "RunDeckServiceTemplate"
 	}
 
 	lifecycle {

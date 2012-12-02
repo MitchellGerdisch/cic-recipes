@@ -1,3 +1,7 @@
+##### NOT USED ######
+# The recipe actually builds the file from scratch.
+# This copy of the file is being kept around just to have an example of what the file should look like.
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
