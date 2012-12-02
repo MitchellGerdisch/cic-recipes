@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit
 
 
 config = new ConfigSlurper().parse(new File("RunDeck-service.properties").toURL())
-project_dir="${config.rundeck_config_dir}/${config.rundeck_project_name}"
+project_dir="${config.rundeck_config_dir}/${config.rundeck_project_name}/etc"
 project_properties_file="${project_dir}/${config.rundeck_project_properties}"
 resources_file="${project_dir}/${config.rundeck_resources_xml}"
 
@@ -41,6 +41,6 @@ Builder.sequential {
 	echo(message:"<node name=\"localhost\" description=\"Rundeck server node\" tags=\"\" hostname=\"localhost\" osArch=\"amd64\" osFamily=\"unix\" osName=\"Linux\" osVersion=\"2.6.32-279.2.1.el6.x86_64\" username=\"root\"/>\n", file:"${resources_file}", append:"true");
 	echo(message:"<node name=\"remotenode-1\" description=\"remotenode-1\" tags=\"\" hostname=\"135.109.205.57\" osArch=\"amd64\" osFamily=\"unix\" osName=\"Linux\" osVersion=\"2.6.32-279.2.1.el6.x86_64\" username=\"root\"/>\n", file:"${resources_file}", append:"true");
 	echo(message:"</project>\n", file:"${resources_file}", append:"true");
-	chown(file:"${resources_file}", owner:"rundeck", type:"both");
+	chown(file:"${resources_file}", owner:"rundeck:rundeck", type:"both");
 }
 	
