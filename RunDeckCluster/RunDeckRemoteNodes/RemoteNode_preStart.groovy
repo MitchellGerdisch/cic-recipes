@@ -22,7 +22,7 @@ Builder.sequential {
 	chmod(file:"${remotenode_ssh_dir}", perm:'700')
 	copy(file:"${context.serviceDirectory}/${config.rundeck_public_ssh_key}", tofile:"${pub_ssh_key_file}")
 	chmod(file:"${pub_ssh_key_file}", perm:'400')
-	concat(destfile:"${remotenode_authorized_keys_file}" append:"true") {
+	concat(destfile:"${remotenode_authorized_keys_file}", append:"true") {
 		filelist(dir:"${remotenode_ssh_dir", files:"${pub_ssh_key_file")
 	}
 	chmod(file:"${remotenode_authorized_keys_fiel}", perm:'400')
