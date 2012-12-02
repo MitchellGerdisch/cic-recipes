@@ -35,5 +35,5 @@ Builder = new AntBuilder()
 Builder.sequential {
 	mkdir(dir:"${bin_dir}")
 	copy(file:"${context.serviceDirectory}/${test_script}", tofile:"${bin_dir}/${test_script}")
-	chmod(file"${bin_dir}/${test_script}", perm:'755')
+	chmod(file:"${bin_dir}/${test_script}", perm:'755')
 }
