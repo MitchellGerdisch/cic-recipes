@@ -11,8 +11,6 @@ resources_file="${project_dir}/etc/${config.rundeck_resources_xml}"
 priv_ssh_key_file="${config.rundeck_server_ssh_dir}/${config.rundeck_private_ssh_key}"
 
 context = ServiceContextFactory.getServiceContext()
-//def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
-//remoteNodesHostInstances = remoteNodesService.waitForInstances(remoteNodesService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
 
 // Set up and place the project.properties file used by RunDeck
 println "RunDeck_preStart.groovy: Building and placing project.properties file under ${config.rundeck_config_dir}/${config.rundeck_project_name}"
@@ -43,9 +41,23 @@ Builder = new AntBuilder()
 Builder.sequential {
 	echo(message:"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n", file:"${resources_file}", append:"false");
 	echo(message:"<project>\n", file:"${resources_file}", append:"true");
-	echo(message:"<node name=\"localhost\" description=\"Rundeck server node\" tags=\"\" hostname=\"localhost\" osArch=\"amd64\" osFamily=\"unix\" osName=\"Linux\" osVersion=\"2.6.32-279.2.1.el6.x86_64\" username=\"root\"/>\n", file:"${resources_file}", append:"true");
-	echo(message:"<node name=\"remotenode-1\" description=\"remotenode-1\" tags=\"\" hostname=\"135.109.205.57\" osArch=\"amd64\" osFamily=\"unix\" osName=\"Linux\" osVersion=\"2.6.32-279.2.1.el6.x86_64\" username=\"root\"/>\n", file:"${resources_file}", append:"true");
+	//echo(message:"<node name=\"localhost\" description=\"Rundeck server node\" tags=\"\" hostname=\"localhost\" osArch=\"amd64\" osFamily=\"unix\" osName=\"Linux\" osVersion=\"2.6.32-279.2.1.el6.x86_64\" username=\"root\"/>\n", file:"${resources_file}", append:"true");
+}
+
+def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
+remoteNodesHostInstances = remoteNodesService.waitForInstances(remoteNodesService.numberOfPlannedInstances, 300, TimeUnit.SECONDS)
+def remotenode_num = 1
+
+for ( remotenodeinstance in remoteNodeHostInstances ) {
+	remotenode_ip="${remotenodeinstance.hostAddress}"
+	println "RundDeck_prestart.groovy: remotenode-${remotenode_num} has IP ${remotenode_ip}"
+	Builder.sequential {
+		echo(message:"<node name=\"remotenode-${remotenode_num}\" description=\"remotenode-${remotenode_num}\" tags=\"\" hostname=\"${remotenode_ip}\" osArch=\"amd64\" osFamily=\"unix\" osName=\"Linux\" osVersion=\"2.6.32-279.2.1.el6.x86_64\" username=\"root\"/>\n", file:"${resources_file}", append:"true");
+	}
+	remotenode_num++
+}
+
+Builder.sequential {
 	echo(message:"</project>\n", file:"${resources_file}", append:"true");
 	chown(file:"${resources_file}", owner:"rundeck:rundeck", type:"both");
 }
-	
