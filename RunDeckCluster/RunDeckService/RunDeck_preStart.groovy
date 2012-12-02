@@ -33,7 +33,7 @@ Builder.sequential {
 	echo(message:"resources.source.1.type=file\n", file:"${project_properties_file}", append:"true");
 	chown(file:"${project_properties_file}", owner:"rundeck:rundeck", type:"both");
 	copy(file:"${context.serviceDirectory}/${config.rundeck_private_ssh_key}", tofile:"${priv_ssh_key_file}")
-	chmod(fiel:"${priv_ssh_key_file}", perm:'400')
+	chmod(file:"${priv_ssh_key_file}", perm:'400')
 	chown(file:"${priv_ssh_key_file}", owner:"rundeck:rundeck", type:"both")
 }
 
