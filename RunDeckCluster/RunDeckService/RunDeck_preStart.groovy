@@ -48,7 +48,7 @@ def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeU
 remoteNodesHostInstances = remoteNodesService.waitForInstances(remoteNodesService.numberOfPlannedInstances, 300, TimeUnit.SECONDS)
 def remotenode_num = 1
 
-for ( remotenodeinstance in remoteNodeHostInstances ) {
+for ( remotenodeinstance in remoteNodesHostInstances ) {
 	remotenode_ip="${remotenodeinstance.hostAddress}"
 	println "RundDeck_prestart.groovy: remotenode-${remotenode_num} has IP ${remotenode_ip}"
 	Builder.sequential {
