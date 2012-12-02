@@ -8,6 +8,8 @@ config = new ConfigSlurper().parse(new File("RunDeckRemoteNodes-service.properti
 remotenode_ssh_dir="${config.remotenode_ssh_dir}"
 pub_ssh_key_file="${remotenode_ssh_dir}/${config.rundeck_public_ssh_key}"
 remotenode_authorized_keys_file="${config.remotenode_authorized_keys_file}"
+bin_dir="${config.bin_dir}"
+test_script="${config.test_script}"
 
 context = ServiceContextFactory.getServiceContext()
 //def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
@@ -26,4 +28,12 @@ Builder.sequential {
 		filelist(dir:"${remotenode_ssh_dir}", files:"${pub_ssh_key_file}")
 	}
 	chmod(file:"${remotenode_authorized_keys_file}", perm:'400')
+}
+
+// Drop in a test script for testing things out
+Builder = new AntBuilder()
+Builder.sequential {
+	mkdir(dir:"${bin_dir}")
+	copy(file:"${context.serviceDirectory}/${test_script}", tofile:"${bin_dir}/${test_script}")
+	chmod(file"${bin_dir}/${test_script}", perm:'755')
 }
