@@ -25,5 +25,5 @@ Builder.sequential {
 	concat(destfile:"${remotenode_authorized_keys_file}", append:"true") {
 		filelist(dir:"${remotenode_ssh_dir}", files:"${pub_ssh_key_file}")
 	}
-	chmod(file:"${remotenode_authorized_keys_fiel}", perm:'400')
+	chmod(file:"${remotenode_authorized_keys_file}", perm:'400')
 }
