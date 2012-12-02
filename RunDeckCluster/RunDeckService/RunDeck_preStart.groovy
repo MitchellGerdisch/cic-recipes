@@ -8,9 +8,9 @@ config = new ConfigSlurper().parse(new File("RunDeck-service.properties").toURL(
 project_properties_file="${config.rundeck_config_dir}/${config.rundeck_project_name}/${config.rundeck_project_properties}"
 resources_file="${config.rundeck_config_dir}.${config.rundeck_project_name}/${config.rundeck_resources_xml}"
 
-context = ServiceContextFactory.getServiceContext()
-def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
-remoteNodesHostInstances = remoteNodesService.waitForInstances(remoteNodesService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
+//context = ServiceContextFactory.getServiceContext()
+//def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
+//remoteNodesHostInstances = remoteNodesService.waitForInstances(remoteNodesService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
 
 // Set up and place the project.properties file used by RunDeck
 println "RunDeck_preStart.groovy: Building and placing project.properties file under ${config.rundeck_config_dir}/${config.rundeck_project_name}"
@@ -28,41 +28,16 @@ Builder.sequential {
 	echo(message:"resources.source.1.type=file", file:"${project_properties_file}", append:"true");
 	chown(file:"${project_properties_file}", owner:"rundeck")
 }
-	
-	
-
 
 // Set up and place the resources.xml file used by RunDeck
 // Loop through remoteNodeHostInstances and grab remoteNodeHostInstances[X].hostAddress and build resources.xml file
-mysqlServerIP = mysqlHostInstances[0].hostAddress
-if (mysqlServerIP == null) {
-        mysqlServerIP = hostIp
-}
-
-println "Retrieving mySqlServerIP: $mysqlServerIP"
-
-def nfsService = context.waitForService("nfsServer", 300, TimeUnit.SECONDS)
-nfsHostInstances = nfsService.waitForInstances(nfsService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
-
-nfsServerIP = nfsHostInstances[0].hostAddress
-if (nfsServerIP == null) {
-        nfsServerIP = hostIp
-}
-
-println "Retrieving nfsServerIP: $nfsServerIP"
-
 Builder = new AntBuilder()
-
-println "Start: copy config and execute start.sh"
 Builder.sequential {
-		replaceregexp(file:"${context.serviceDirectory}/config.php",
-					match:"MYSQLSERVERIP",
-					replace:"$mysqlServerIP")		
-		copy(file:"${context.serviceDirectory}/config.php", tofile:"/var/www/html/owncloud/config/config.php")
-		chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")					
-		exec(executable:"${context.serviceDirectory}/start.sh",osfamily:"unix") {
-			arg value:"$nfsServerIP"
-			}
-println "Finished attempting to copy config and execute start.sh"
-
+	echo(message:"<?xml version="1.0" encoding=\"UTF-8\"?>", file:"${resources_file}", append:"false");
+	echo(message:"<project>", file:"${resources_file}", append:"true");
+	echo(message:"<node name=\"localhost\" description=\"Rundeck server node\" tags=\"\" hostname=\"localhost\" osArch=\"amd64\" osFamily=\"unix\" osName=\"Linux\" osVersion=\"2.6.32-279.2.1.el6.x86_64\" username=\"root\"/>", file:"${resources_file}", append:"true");
+	echo(message:"<node name=\"remotenode-1\" description=\"remotenode-1\" tags=\"\" hostname=\"135.109.205.57\" osArch=\"amd64\" osFamily=\"unix\" osName=\"Linux\" osVersion=\"2.6.32-279.2.1.el6.x86_64\" username=\"root\"/>", file:"${resources_file}", append:"true");
+	echo(message:"</project>", file:"${resources_file}", append:"true");
+	chown(file:"${resources_file}", owner:"rundeck");
 }
+	
