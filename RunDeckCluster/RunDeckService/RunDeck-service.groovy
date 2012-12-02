@@ -34,7 +34,7 @@ service {
 		preStart "RunDeck_preStart.groovy"
 		start ([
 			//		"Win.*":"run.bat",
-					"Linux.*":"RunDeck_start.groovy"
+					"Linux.*":"RunDeck_start.sh"
 				])
 
 			
@@ -43,10 +43,10 @@ service {
 			ServiceUtils.isPortOccupied(currentPort)
 		}	
 		
-		preStop ([	
+//		preStop ([	
 //			"Win.*":"killAllHttpd.bat",		
-			"Linux.*":"RunDeck_stop.groovy"
-			])
+//			"Linux.*":"RunDeck_stop.groovy"
+//			])
 		
 			
 		locator {			
@@ -57,10 +57,12 @@ service {
 
 	}
 
+	/*
 	customCommands ([
 		"addNode" : "RunDeck_addNode.groovy",
 		"removeNode" : "RunDeck_removeNode.groovy",
 	])
+	*/
 	
 	userInterface {
 		metricGroups = ([
