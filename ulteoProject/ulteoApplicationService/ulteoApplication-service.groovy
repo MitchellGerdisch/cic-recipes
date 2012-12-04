@@ -14,7 +14,7 @@ service {
 	maxAllowedInstances 2
 	
 	compute {
-		template "QUAD_ROOT_ACCESS"
+		template "ulteoApplication_Template"
 	}	
 	
 	lifecycle{
