@@ -56,7 +56,7 @@ service {
 				name "process"
 
 				metrics([
-					"Need to Scale App Servers?",
+					"Number of VDI Sessions",
 					"Process Cpu Usage",
 					"Total Process Virtual Memory",
 					"Num Of Active Threads"
