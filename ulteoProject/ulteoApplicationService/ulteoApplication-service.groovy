@@ -39,12 +39,12 @@ service {
 				sessionManagerInstances = ulteoManagerService.waitForInstances(ulteoManagerService.numberOfPlannedInstances, 180, TimeUnit.SECONDS)
 				managerIP=sessionManagerInstances[0].hostAddress
 				
-				println "Getting session count from ${managerIP}"
+				println "Checking ulteoManager DB at ${managerIP} to see if App Servers should be scaled"
 				
-				sessionCount = "/root/getUlteoSessionsCount.sh ${managerIP} root root".execute().text
+				scaleIndicator = "/root/${config.scaleCheck} ${managerIP} root root".execute().text
 
-				println "Total Number of Sessions --->  : " + sessionCount
-			 	return ["Current Active Sessions":sessionCount as Integer ]
+				println "Number of VDI sessions --->  : " + scaleIndicator
+			 	return ["Number of VDI Sessions":scaleIndicator as Integer ]
 	      }	
 	}
 	
@@ -56,13 +56,24 @@ service {
 				name "process"
 
 				metrics([
+					"Need to Scale App Servers?",
 					"Process Cpu Usage",
-					"Current Active Sessions",
 					"Total Process Virtual Memory",
 					"Num Of Active Threads"
 				])
 			}
 		])
+
+		widgetGroup {
+			name "Number of VDI Sessions"
+			widgets ([
+				balanceGauge{metric = "Number of VDI Sessions"},
+				barLineChart{
+					metric "Number of VDI Sessions"
+					axisYUnit Unit.REGULAR
+				}
+			])
+		},
 
 		widgetGroups = ([
 			widgetGroup {
@@ -72,17 +83,6 @@ service {
 					barLineChart{
 						metric "Process Cpu Usage"
 						axisYUnit Unit.PERCENTAGE
-					}
-				])
-			},
-
-			widgetGroup {
-				name "Current Active Sessions"
-				widgets ([
-					balanceGauge{metric = "Current Active Sessions"},
-					barLineChart{
-						metric "Current Active Sessions"
-						axisYUnit Unit.REGULAR
 					}
 				])
 			},
@@ -123,12 +123,12 @@ service {
 			}
 
 			highThreshold {
-				value 1.9
+				value 1
 				instancesIncrease 1
 			}
 
 			lowThreshold {
-				value 1.1
+				value 0
 				instancesDecrease 1
 			}
 		}

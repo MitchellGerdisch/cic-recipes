@@ -43,11 +43,11 @@ switch (currVendor) {
 }
 
 // Place the getUlteoSession.sh script in place
-println("Moving getUlteoSessionsCount.sh to it's proper home")
+println("Moving ${config.scaleCheck} to it's proper home")
 newbuilder = new AntBuilder()
 newbuilder.sequential {
-	copy(file:"${context.serviceDirectory}/getUlteoSessionsCount.sh" , 		tofile:"/root/getUlteoSessionsCount.sh")
-	chmod(file: "/root/getUlteoSessionsCount.sh", perm:"+x")
+	copy(file:"${context.serviceDirectory}/${config.scaleCheck}" , 		tofile:"/root/${config.scaleCheck}")
+	chmod(file: "/root/${config.scaleCheck}", perm:"+x")
 }
 
 
