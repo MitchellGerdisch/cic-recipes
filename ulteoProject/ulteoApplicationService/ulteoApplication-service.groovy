@@ -64,18 +64,19 @@ service {
 			}
 		])
 
-		widgetGroup {
-			name "Number of VDI Sessions"
-			widgets ([
-				balanceGauge{metric = "Number of VDI Sessions"},
-				barLineChart{
-					metric "Number of VDI Sessions"
-					axisYUnit Unit.REGULAR
-				}
-			])
-		},
 
 		widgetGroups = ([
+			widgetGroup {
+				name "Number of VDI Sessions"
+				widgets ([
+					balanceGauge{metric = "Number of VDI Sessions"},
+					barLineChart{
+						metric "Number of VDI Sessions"
+						axisYUnit Unit.REGULAR
+					}
+				])
+			},
+		
 			widgetGroup {
 				name "Process Cpu Usage"
 				widgets ([
