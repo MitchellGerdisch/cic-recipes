@@ -1,6 +1,6 @@
 application {
 	
-	name="VDIApplication"
+	name="ulteoProject"
 
 	service {
 		name = "ulteoManagerService"
