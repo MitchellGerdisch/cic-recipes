@@ -2,6 +2,8 @@ import java.util.concurrent.TimeUnit
 import org.cloudifysource.dsl.context.ServiceContextFactory
 import java.sql.*
 
+config = new ConfigSlurper().parse(new File("ulteoApplication.properties").toURL())
+
 service {
 
 	name "ulteoApplicationService"
