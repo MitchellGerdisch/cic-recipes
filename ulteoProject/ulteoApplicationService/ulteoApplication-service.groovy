@@ -1,6 +1,8 @@
+import java.sql.*
+import org.hyperic.sigar.OperatingSystem
+import org.cloudifysource.usm.USMUtils
 import java.util.concurrent.TimeUnit
 import org.cloudifysource.dsl.context.ServiceContextFactory
-import java.sql.*
 
 config = new ConfigSlurper().parse(new File("ulteoApplication.properties").toURL())
 
