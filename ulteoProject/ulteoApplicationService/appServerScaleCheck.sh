@@ -1,4 +1,5 @@
 #!/bin/sh
+# 
 
 # queries for number of active sessions from utleo service manager DB
 #
