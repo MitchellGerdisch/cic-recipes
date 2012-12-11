@@ -1,3 +1,7 @@
+import java.util.concurrent.TimeUnit
+import org.cloudifysource.dsl.context.ServiceContextFactory
+import org.cloudifysource.dsl.utils.ServiceUtils;
+import org.hyperic.sigar.OperatingSystem
 
 service {
 
