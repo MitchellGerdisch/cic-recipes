@@ -1,6 +1,6 @@
 application {
 	
-	name="ulteoProject"
+	name="ulteoVDI"
 
 	service {
 		name = "ulteoManagerService"
