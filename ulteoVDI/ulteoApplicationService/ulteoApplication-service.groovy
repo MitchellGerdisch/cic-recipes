@@ -78,37 +78,6 @@ service {
 				])
 			},
 		
-			widgetGroup {
-				name "Process Cpu Usage"
-				widgets ([
-					balanceGauge{metric = "Process Cpu Usage"},
-					barLineChart{
-						metric "Process Cpu Usage"
-						axisYUnit Unit.PERCENTAGE
-					}
-				])
-			},
-
-		   widgetGroup {
-				name "Total Process Virtual Memory"
-				widgets([
-					balanceGauge{metric = "Total Process Virtual Memory"},
-					barLineChart {
-						metric "Total Process Virtual Memory"
-						axisYUnit Unit.MEMORY
-					}
-				])
-			},
-			widgetGroup {
-				name "Num Of Active Threads"
-				widgets ([
-					balanceGauge{metric = "Num Of Active Threads"},
-					barLineChart{
-						metric "Num Of Active Threads"
-						axisYUnit Unit.REGULAR
-					}
-				])
-			}
 		])
 	}
 
@@ -125,12 +94,12 @@ service {
 			}
 
 			highThreshold {
-				value 1
+				value 1.1
 				instancesIncrease 1
 			}
 
 			lowThreshold {
-				value 0
+				value 1
 				instancesDecrease 1
 			}
 		}
