@@ -40,4 +40,5 @@ service {
 //			 	return ["Current Active Sessions":  sessionCount.toInteger() ]
 //	      }	
 	}
+}
 
