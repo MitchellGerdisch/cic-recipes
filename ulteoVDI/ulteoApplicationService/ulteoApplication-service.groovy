@@ -42,7 +42,7 @@ service {
 				
 				println "Checking ulteoManager DB at ${managerIP} to see if App Servers should be scaled"
 				
-				scaleIndicator = "/root/${scaleCheck} ${managerIP} root root".execute().text
+				scaleIndicator = "/root/appServerScaleCheck.sh ${managerIP} root root".execute().text
 
 				println "Number of VDI sessions --->  : " + scaleIndicator
 			 	return ["Number of VDI Sessions":scaleIndicator as Integer ]
