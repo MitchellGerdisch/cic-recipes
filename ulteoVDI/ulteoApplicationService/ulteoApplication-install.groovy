@@ -42,7 +42,7 @@ switch (currVendor) {
 	default: throw new Exception("Support for ${currVendor} is not implemented")
 }
 
-// Place the getUlteoSession.sh script in place
+// Place the .sh script in place
 println("Moving ${config.scaleCheck} to it's proper home")
 newbuilder = new AntBuilder()
 newbuilder.sequential {

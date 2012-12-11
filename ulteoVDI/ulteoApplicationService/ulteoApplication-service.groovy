@@ -94,12 +94,12 @@ service {
 			}
 
 			highThreshold {
-				value 1.1
+				value 1.9
 				instancesIncrease 1
 			}
 
 			lowThreshold {
-				value 1
+				value 1.1
 				instancesDecrease 1
 			}
 		}
