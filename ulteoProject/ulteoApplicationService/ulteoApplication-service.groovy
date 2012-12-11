@@ -115,7 +115,7 @@ service {
 		scalingRule {
         
 			serviceStatistics {
-				metric "Current Active Sessions"
+				metric "Number of VDI Sessions"
 				//statistics Statistics.maximumOfAverages
 				movingTimeRangeInSeconds 10
 			}
