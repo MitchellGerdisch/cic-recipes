@@ -48,7 +48,6 @@ newbuilder = new AntBuilder()
 newbuilder.sequential {
 	copy(file:"${context.serviceDirectory}/${config.numVdiSessions}" , 		tofile:"/root/${config.numVdiSessions}")
 	copy(file:"${context.serviceDirectory}/${config.numActServers}" , 		tofile:"/root/${config.numActServers}")
-	copy(file:"${context.serviceDirectory}/${config.scaleChecker}" , 		tofile:"/root/${config.scaleChecker}")
 	chmod(dir:"/root", perm:"+x", includes:"*.sh")
 }
 

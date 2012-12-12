@@ -46,7 +46,7 @@ service {
 				numActiveServers = "/root/numActiveServers.sh ${managerIP} root root".execute().text
 				
 				// test code for now
-				scaleIndicator=0
+				scaleIndicator = 0
 
 				println "Number of VDI sessions --->  : " + numSessions
 				println "Number of Active Servers ---> :" + numActiveServers
