@@ -42,12 +42,14 @@ switch (currVendor) {
 	default: throw new Exception("Support for ${currVendor} is not implemented")
 }
 
-// Place the .sh script in place
-println("Moving ${config.scaleCheck} to it's proper home")
+// Place the  scripts in place
+println("Moving shell scripts to their proper home")
 newbuilder = new AntBuilder()
 newbuilder.sequential {
-	copy(file:"${context.serviceDirectory}/${config.scaleCheck}" , 		tofile:"/root/${config.scaleCheck}")
-	chmod(file: "/root/${config.scaleCheck}", perm:"+x")
+	copy(file:"${context.serviceDirectory}/${config.numVdiSessions}" , 		tofile:"/root/${config.numVdiSessions}")
+	copy(file:"${context.serviceDirectory}/${config.numActServers}" , 		tofile:"/root/${config.numActServers}")
+	copy(file:"${context.serviceDirectory}/${config.scaleChecker}" , 		tofile:"/root/${config.scaleChecker}")
+	chmod(dir:"/root", perm:"+x", includes:"*.sh")
 }
 
 
