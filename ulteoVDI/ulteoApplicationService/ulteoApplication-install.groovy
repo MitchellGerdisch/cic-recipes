@@ -47,7 +47,7 @@ println("Moving shell scripts to their proper home")
 newbuilder = new AntBuilder()
 newbuilder.sequential {
 	copy(file:"${context.serviceDirectory}/${config.numVdiSessions}" , 		tofile:"/root/${config.numVdiSessions}")
-	copy(file:"${context.serviceDirectory}/${config.numActServers}" , 		tofile:"/root/${config.numActServers}")
+	copy(file:"${context.serviceDirectory}/${config.numActiveServers}" , 		tofile:"/root/${config.numActiveServers}")
 	chmod(dir:"/root", perm:"+x", includes:"*.sh")
 }
 
