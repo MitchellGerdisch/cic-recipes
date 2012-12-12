@@ -12,6 +12,6 @@ mysql_vm_ip=${1}
 mysql_username=${2}
 mysql_password=${3}
 
-num_sessions=`mysql -u"${mysql_username}" -p"${mysql_password}" -h"${mysql_vm_ip}" --skip-column_names -e 'select count(*) from ovd.ulteo_sessions;' | grep "\|"`
+num_active_servers=`mysql -u"${mysql_username}" -p"${mysql_password}" -h"${mysql_vm_ip}" --skip-column_names -e 'select server from ovd.ulteo_sessions;' |grep -v "^+" |sort -u | wc -l`
 
-echo "${num_sessions}"
+echo ${num_active_servers}

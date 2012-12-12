@@ -44,14 +44,10 @@ service {
 				
 				numSessions = "/root/numVdiSessions.sh ${managerIP} root root".execute().text
 				numActiveServers = "/root/numActiveServers.sh ${managerIP} root root".execute().text
-				
-				// test code for now
-				scaleIndicator = 0
 
 				println "Number of VDI sessions --->  : " + numSessions
-				println "Number of Active Servers ---> :" + numActiveServers
-				println "Scale Indicator ---> :" + scaleIndicator
-			 	return ["Number of VDI Sessions":numSessions as Integer, "Number of Active Servers":numActiveServers as Integer, "Scale Indicator": scaleIndicator as Integer]
+				println "Number of Servers in Use ---> :" + numActiveServers
+			 	return ["Number of VDI Sessions":numSessions as Integer, "Number of Servers in Use":numActiveServers as Integer]
 	      }	
 	}
 	
@@ -64,8 +60,7 @@ service {
 
 				metrics([
 					"Number of VDI Sessions",
-					"Number of Active Servers",
-					"Scale Indicator",
+					"Number of Servers in Use",
 					"Process Cpu Usage",
 					"Total Process Virtual Memory",
 					"Num Of Active Threads"
@@ -86,11 +81,11 @@ service {
 				])
 			},
 			widgetGroup {
-				name "Number of Active Servers"
+				name "Number of Servers in Use"
 				widgets ([
-					balanceGauge{metric = "Number of Active Servers"},
+					balanceGauge{metric = "Number of Servers in Use"},
 					barLineChart{
-						metric "Number of Active Servers"
+						metric "Number of Servers in Use"
 						axisYUnit Unit.REGULAR
 					}
 				])
@@ -106,18 +101,18 @@ service {
 		scalingRule {
         
 			serviceStatistics {
-				metric "Scale Indicator"
+				metric "Number of VDI Sessions"
 				//statistics Statistics.maximumOfAverages
 				movingTimeRangeInSeconds 10
 			}
 
 			highThreshold {
-				value 0.9
+				value 1.9
 				instancesIncrease 1
 			}
 
 			lowThreshold {
-				value 0.1
+				value 1.1
 				instancesDecrease 1
 			}
 		}
