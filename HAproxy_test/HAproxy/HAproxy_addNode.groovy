@@ -16,6 +16,8 @@ haproxy_cfg_file="${config.haproxy_cfg_file}"
 haproxy_cfg_dir="${config.haproxy_cfg_dir}"
 backend_port="${config.backend_port}"
 
+restartScript="HAproxy_restart.sh"
+
 
 println "HAproxy_addNode: About to add ${backendVmIp} to ${haproxy_cfg_dir}/${haproxy_cfg_file} ..."
 
@@ -28,4 +30,7 @@ Builder.sequential {
 		replace:"server srv-${backendVmIp} ${backendVmIp}:${backend_port} weight 1 maxconn 100 check inter 4000 cookie srv-${backendVmIp}");	
 	// Now add back in the line used to do the above substitution.
 	echo(message:"#INSERT BACKEND SERVER ENTRY HERE#\n", file:"${haproxy_cfg_dir}/${haproxy_cfg_file}", append:"true");
+	
+	echo(message:"HAproxy_addNode.groovy: restarting haproxy ...")
+	exec(executable: "${context.serviceDirectory}/${restartScript}",failonerror: "true")
 }

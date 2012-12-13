@@ -26,10 +26,14 @@ service {
 			ServiceUtils.isPortOccupied(currentPort)
 		}	
 	
+		// we need to be able to restart when we add/remove nodes so I'm returning a blank locator
 		locator {			
-			def myPids = ServiceUtils.ProcessUtils.getPidsWithQuery("State.Name.re=haproxy")
-			println "HAproxy-service.groovy: current PIDs: ${myPids}"
-			return myPids
+			/* 
+			 * def myPids = ServiceUtils.ProcessUtils.getPidsWithQuery("State.Name.re=haproxy")
+			 * println "HAproxy-service.groovy: current PIDs: ${myPids}"
+			 * return myPids
+			 */
+			return []
         }			
 	}
 	

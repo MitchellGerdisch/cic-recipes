@@ -17,10 +17,15 @@ config = new ConfigSlurper().parse(new File("HAproxy-service.properties").toURL(
 haproxy_cfg_dir="${config.haproxy_cfg_dir}"
 haproxy_cfg_file="${config.haproxy_cfg_file}"
 
+restartScript="HAproxy_restart.sh"
+
 // Add the new server into resources.xml
 Builder = new AntBuilder()
 Builder.sequential {
 	// find the line with the vm IP in it and delete it
 	replaceregexp(file:"${haproxy_cfg_dir}/${haproxy_cfg_file}", match:".*${backend_ip}.*", replace:"");
+	
+	echo(message:"HAproxy_removeNode.groovy: restarting haproxy ...")
+	exec(executable: "${context.serviceDirectory}/${restartScript}",failonerror: "true")
 }
 
