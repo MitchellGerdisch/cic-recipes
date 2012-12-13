@@ -20,7 +20,7 @@ service {
 
 	compute {
 		// Use template with root access - to make things easier
-		template "RunDeckRemoteNodeTemplate"
+		template "QUAD_ROOT_ACCESS"
 	}
 
 	lifecycle {	
