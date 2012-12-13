@@ -37,5 +37,5 @@ builder.sequential {
 		replace:"${backend_name}")
 	
 	// Put our special version of the haproxy cfg file in place.
-	copy(file:"${context.serviceDirectory}/${haproxy_cfg_file}", tofile: "${haproxy_config_dir}/${haproxy_cfg_file}")
+	copy(file:"${context.serviceDirectory}/${haproxy_cfg_file}", tofile: "${haproxy_cfg_dir}/${haproxy_cfg_file}")
 }

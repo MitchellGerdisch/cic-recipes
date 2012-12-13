@@ -16,7 +16,8 @@ yum install -y -q httpd || error_exit $? "Failed on: sudo yum install -y -q http
 	
 service httpd start
 
-echo "You have reached a remote node apache deployment" > /var/www/html/index.html
+echo "You have reached a remote node apache deployment<P>" > /var/www/html/index.html
+ifconfig  | grep "inet addr" | grep 135 >> /var/www/html/index/html
  
 
 
