@@ -37,13 +37,13 @@ service {
         }	
 	
 		postStart {
-			def RunDeckService = context.waitForService("RunDeckService", 180, TimeUnit.SECONDS)
+			def HAproxy = context.waitForService("HAproxy", 180, TimeUnit.SECONDS)
 			def hostAddress=System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
 			HAproxy.invoke("addNode", "${hostAddress}" as String)
 		}
 		
 		postStop {
-			def RunDeckService = context.waitForService("RunDeckService", 180, TimeUnit.SECONDS)
+			def HAproxy = context.waitForService("HAproxy", 180, TimeUnit.SECONDS)
 			def hostAddress=System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
 			HAproxy.invoke("removeNode", "${hostAddress}" as String)
 		}
