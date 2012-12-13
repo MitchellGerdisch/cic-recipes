@@ -15,6 +15,8 @@ num_wanted_file="${config.num_wanted_file}"
 check_num_wanted_script="${config.check_num_wanted_script}"
 set_num_wanted_script="${config.set_num_wanted_script}"
 
+currVendor="linux"
+
 context = ServiceContextFactory.getServiceContext()
 def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
 num_planned_instances=remoteNodesService.numberOfPlannedInstances
