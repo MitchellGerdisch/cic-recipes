@@ -25,7 +25,7 @@ Builder.sequential {
 	// First replace the last line of the resources.xml file with the new resource entry.
 	replaceregexp(file:"${haproxy_cfg_dir}/${haproxy_cfg_file}", 
 		match:"#INSERT BACKEND SERVER ENTRY HERE#", 
-		replace:"server srv-${backendVmIp} ${backendVmIp}:${backend_port} weight 1 maxconn 100 check inter 4000");	
+		replace:"server srv-${backendVmIp} ${backendVmIp}:${backend_port} weight 1 maxconn 100 check inter 4000 cookie srv-${backendVmIp}");	
 	// Now add back in the line used to do the above substitution.
 	echo(message:"#INSERT BACKEND SERVER ENTRY HERE#\n", file:"${haproxy_cfg_dir}/${haproxy_cfg_file}", append:"true");
 }
