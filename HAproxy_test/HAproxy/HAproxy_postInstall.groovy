@@ -22,19 +22,24 @@ builder.sequential {
 	// Now substitute in the various bits based on this specific installation
 	replaceregexp(file:"${context.serviceDirectory}/${haproxy_cfg_file}",
 		match:"HTTPCHK",
-		replace:"${httpchk}")
+		replace:"${httpchk}",
+		flags: "g")
 	replaceregexp(file:"${context.serviceDirectory}/${haproxy_cfg_file}",
 		match:"FRONTEND_NAME",
-		replace:"${frontend_name}")
+		replace:"${frontend_name}",
+		flags: "g")
 	replaceregexp(file:"${context.serviceDirectory}/${haproxy_cfg_file}",
 		match:"ACL_NAME",
-		replace:"${acl_name}")
+		replace:"${acl_name}",
+		flags: "g")
 	replaceregexp(file:"${context.serviceDirectory}/${haproxy_cfg_file}",
 		match:"ACL_PATH",
-		replace:"${acl_path}")
+		replace:"${acl_path}",
+		flags: "g")
 	replaceregexp(file:"${context.serviceDirectory}/${haproxy_cfg_file}",
 		match:"BACKEND_NAME",
-		replace:"${backend_name}")
+		replace:"${backend_name}",
+		flags: "g")
 	
 	// Put our special version of the haproxy cfg file in place.
 	copy(file:"${context.serviceDirectory}/${haproxy_cfg_file}", tofile: "${haproxy_cfg_dir}/${haproxy_cfg_file}")
