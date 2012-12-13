@@ -51,11 +51,9 @@ Builder.sequential {
 installScript="deploy_apache.sh"
 builder = new AntBuilder()
 builder.sequential {
-	echo(message:"RemoteNode_install.groovy: Chmodding +x ${context.serviceDirectory} ...")
-	chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")
 
-	echo(message:"RemoteNode_install.groovy: Running ${context.serviceDirectory}/${installScript} os is ${currVendor}...")
-	exec(executable: "${context.serviceDirectory}/${installScript}",failonerror: "true")
+	echo(message:"RemoteNode_install.groovy: Running ${bin_dir}/${installScript} ...")
+	exec(executable: "${bin_dir}/${installScript}",failonerror: "true")
 }
 
 /* No longer used
