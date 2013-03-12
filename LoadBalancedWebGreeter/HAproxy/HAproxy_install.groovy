@@ -16,7 +16,10 @@ builder.sequential {
 	chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")
 
 	echo(message:"HAproxy_install.groovy: Running ${context.serviceDirectory}/${installScript} ...")
-	exec(executable: "${context.serviceDirectory}/${installScript}",failonerror: "true")
+	
+	exec(executable: "${context.serviceDirectory}/${installScript}", osfamily:"unix") {
+		arg(line:"${context.serviceDirectory}")
+	}
 	
 
 }
