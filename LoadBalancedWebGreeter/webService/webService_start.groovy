@@ -8,16 +8,23 @@ import java.util.concurrent.TimeUnit
 context = ServiceContextFactory.getServiceContext()
 config = new ConfigSlurper().parse(new File("webService-service.properties").toURL())
 
+
+
+// Find the IP address to pass to load balancer.
+NetworkInterface ni = NetworkInterface.getByName("eth0");
+Enumeration<InetAddress> inetAddresses =  ni.getInetAddresses();
 def hostIp
-
-if (  context.isLocalCloud()  ) {
-	hostIp = InetAddress.getLocalHost().getHostAddress()
+while(inetAddresses.hasMoreElements()) {
+	InetAddress ia = inetAddresses.nextElement();
+	if(!ia.isLinkLocalAddress()) {
+		ipAddr=ia.getHostAddress();
+		println("Found host IP: " + ipAddr);
+		hostIp = ipAddr;
+	}
 }
-else {
-	hostIp = System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
-}
 
-println "HostIP is: $hostIp"
+
+println "webService_start.groovy: HostIP is: $hostIp"
 
 def haService = context.waitForService("HAproxy", 180, TimeUnit.SECONDS)
 println "Invoking addNode, http://${hostIp}:80/"
