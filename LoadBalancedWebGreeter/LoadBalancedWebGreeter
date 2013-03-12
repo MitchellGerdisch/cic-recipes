@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<tiersProperties>
+		<property>
+			<tierName>webService</tierName>
+			<name>WebPageGreeting</name>
+			<type>String</type>
+			<defaultValue>Hello World</defaultValue>
+			<description>Greeting Text</description>
+		</property>
+	</tiersProperties>
+</application>
